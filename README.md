@@ -1,2 +1,2 @@
 # AviAIR
-Airline Reservation system using flask
+Airline Reservation system using Flask
