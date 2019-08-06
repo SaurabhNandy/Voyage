@@ -49,15 +49,15 @@ body, html {
 
 .single-feature {
   height:320px;
-    background: #f7f4f4;
-    border: 8px solid transparent;
-    border-color: #c32026;
+  background: #f7f4f4;
+  border: 8px solid transparent;
+  border-color: #c32026;
   text-align: center;
   padding: 30px 25px 45px 25px;
 }
 
 .single-feature h4 {
-    margin: 35px 0 25px 0;
+  margin: 35px 0 25px 0;
   padding: 0px;
   font-size: 22px;
 }
@@ -173,4 +173,27 @@ body, html {
 
 .fadeIn-right{
   left: 80%;
+}
+
+@media screen and (max-width:767px){
+  .info{
+    text-align: center;
+  }
+  .info p{
+    display: none;
+  }
+  .info a{
+    display: none;
+  }
+  .search-form{
+    padding:auto;
+    width: 80%;
+    height:25rem;
+    margin-top:3%;
+    margin-left:10%;
+    margin-right: 10%;
+  }
+  .form-br{
+    display: none;
+  }
 }
