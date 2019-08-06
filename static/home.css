@@ -1,0 +1,176 @@
+body, html {
+  height: 100%;
+}
+
+.parallax {
+  /* The image used */
+  background-image: url('https://images7.alphacoders.com/382/382317.jpg');
+  opacity:0.85;
+  /* Full height */
+  height: 100%; 
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Turn off parallax scrolling for tablets and phones. Increase the pixels if needed */
+@media only screen and (max-device-width: 1366px) {
+  .parallax {
+    background-attachment: scroll;
+  }
+}
+
+.nav-item.active{
+  box-sizing: border-box;
+  border-radius: 2px;
+  background-color: #a8cf45;
+  color: #ffffff;
+}
+
+.nav-item:hover{
+  box-sizing: border-box;
+  border-radius: 2px;
+  background-color: #a8fd34;
+  color: #ffffff;
+}
+
+.search-field{
+  padding: 15px;
+  width:80% ;
+  margin-left: 10%;
+}
+
+.about-box{
+  padding: 70px 0px;
+}
+
+.single-feature {
+  height:320px;
+    background: #f7f4f4;
+    border: 8px solid transparent;
+    border-color: #c32026;
+  text-align: center;
+  padding: 30px 25px 45px 25px;
+}
+
+.single-feature h4 {
+    margin: 35px 0 25px 0;
+  padding: 0px;
+  font-size: 22px;
+}
+
+@media screen and (max-width: 1040px) and (min-width: 767px){
+  .single-feature h4{
+    margin: 25px 0 15px 0;
+    padding: 0px;
+    font-size: 18px;
+  }
+  .single-feature p{
+    margin: 15px 0 10px 0;
+    padding: 0px;
+    font-size: 13px;
+  }
+}
+
+.main-title{
+  color: #2d2d2d;
+  text-align: center;
+  text-transform: capitalize;
+  padding: 0.7em 0;
+}
+
+.img-container{
+  padding-bottom: 2rem ;
+}
+
+.img-container .title{
+  color: #1a1a1a;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.content {
+  position: relative;
+  width: 90%;
+  max-width: 400px;
+  margin: auto;
+  overflow: hidden;
+}
+
+.content .content-overlay {
+  background: rgba(0,0,0,0.7);
+  position: absolute;
+  height: 99%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 0;
+  -webkit-transition: all 0.4s ease-in-out 0s;
+  -moz-transition: all 0.4s ease-in-out 0s;
+  transition: all 0.4s ease-in-out 0s;
+}
+
+.content:hover .content-overlay{
+  opacity: 1;
+}
+
+.content-image{
+  width: 100%;
+}
+
+.content-details {
+  position: absolute;
+  text-align: center;
+  padding-left: 1em;
+  padding-right: 1em;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  opacity: 0;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  -webkit-transition: all 0.3s ease-in-out 0s;
+  -moz-transition: all 0.3s ease-in-out 0s;
+  transition: all 0.3s ease-in-out 0s;
+}
+
+.content:hover .content-details{
+  top: 50%;
+  left: 50%;
+  opacity: 1;
+}
+
+.content-details h3{
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.5em;
+  text-transform: uppercase;
+}
+
+.content-details p{
+  color: #fff;
+  font-size: 0.8em;
+}
+
+.fadeIn-bottom{
+  top: 80%;
+}
+
+.fadeIn-top{
+  top: 20%;
+}
+
+.fadeIn-left{
+  left: 20%;
+}
+
+.fadeIn-right{
+  left: 80%;
+}
