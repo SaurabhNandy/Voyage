@@ -26,17 +26,22 @@ body, html {
 .nav-item.active{
   box-sizing: border-box;
   border-radius: 2px;
-  background-color: #a8cf45;
+  background-color: #F39C12;
   color: #ffffff;
 }
 
 .nav-item:hover{
   box-sizing: border-box;
   border-radius: 2px;
-  background-color: #a8fd34;
+  background-color: #F39C12;
   color: #ffffff;
 }
 
+.search-in{
+  border: 2px solid #232f3e;
+  border-radius: 1px;
+  border-color: #232f3e;
+}
 .search-field{
   padding: 15px;
   width:80% ;
