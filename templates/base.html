@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- bootstrap4 -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <!-- calendar -->
+  <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
+  <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+  <!-- select2 -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
+    <!-- fa icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'home.css') }} ">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>  
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('.js-example-basic-from').select2({
+      placeholder: "From",
+      allowClear: true,
+      width:'resolve'});
+    $('.js-example-basic-to').select2({
+      placeholder: "To",
+      allowClear: true,
+      width:'resolve'});
+    });
+  </script>
+</head>
+
+
+<body>
+<div class="aviair-navbar">
+<nav class="navbar navbar-expand-md navbar-light fixed-top" style="height:4rem; z-index: 1; background-color:#232f3e; ">
+  <a class="navbar-brand" href="#"><img src="https://airsewa.gov.in/assets/images/icn_connecting_flight.png"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse my-2 my-lg-0 " id="navbarSupportedContent" style="z-index:1; background-color:#232f3e; ">
+    <ul class="navbar-nav ml-auto ">
+      <li class="nav-item home {% if home %} {{ home }} {% endif %}" ><a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a></li>
+      <strong><li class="nav-item services"><a class="nav-link" href="services.html">Services</a></li></strong>
+      <strong><li class="nav-item contact"><a class="nav-link" href="contact.html">Contact Us</a></li></strong>
+      <strong><li class="nav-item faq"><a class="nav-link" href="faq.html">FAQs</a></li></strong>
+      <strong><li class="nav-item dropdown register"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reg/Login</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Register</a>
+          <a class="dropdown-item" href="#">Login</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">MyAccount</a>
+        </div>
+      </li></strong>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+</div>
+
+
+{% block content %}
+{% endblock content %}
+
+
+<footer class="footer bg-dark">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="widget clearfix">
+                    <div class="widget-title">
+                        <img src="images/logos/logo-realestate.png" alt="">
+                    </div>
+                    <p> Integer rutrum ligula eu dignissim laoreet. Pellentesque venenatis nibh sed tellus faucibus bibendum. Sed fermentum est vitae rhoncus molestie. Cum sociis natoque penatibus et magnis dis montes.</p>
+                    <p>Sed fermentum est vitae rhoncus molestie. Cum sociis natoque penatibus et magnis dis montes.</p>
+                </div><!-- end clearfix -->
+            </div><!-- end col -->
+
+            <div class="col-md-3 col-sm-3 col-xs-12">
+                <div class="widget clearfix">
+                    <div class="widget-title">
+                        <h3>Info Link</h3>
+                    </div>
+
+                    <ul class="twitter-widget footer-links">
+                        <li><a href="#"> Home </a></li>
+                        <li><a href="#"> About Us </a></li>
+                        <li><a href="#"> Services</a></li>
+            <li><a href="#"> Gallery</a></li>
+            <li><a href="#"> Properties</a></li>
+            <li><a href="#"> Contact</a></li>
+                    </ul><!-- end links -->
+                </div><!-- end clearfix -->
+            </div><!-- end col -->
+        
+      <div class="col-md-3 col-sm-3 col-xs-12">
+                <div class="widget clearfix">
+                    <div class="widget-title">
+                        <h3>Contact Details</h3>
+                    </div>
+
+                    <ul class="footer-links">
+                        <li><a href="mailto:#">info@yoursite.com</a></li>
+                        <li><a href="#">www.yoursite.com</a></li>
+                        <li>PO Box 16122 Collins Street West Victoria 8007 Australia</li>
+                        <li>+61 3 8376 6284</li>
+                    </ul><!-- end links -->
+                </div><!-- end clearfix -->
+            </div><!-- end col -->
+        
+            <div class="col-md-2 col-sm-2 col-xs-12">
+                <div class="widget clearfix">
+                    <div class="widget-title">
+                        <h3>Social</h3>
+                    </div>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fa fa-facebook"></i> Facebook</a></li>
+                        <li><a href="#"><i class="fa fa-github"></i> Github</a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i> Twitter</a></li>
+                        <li><a href="#"><i class="fa fa-dribbble"></i> Dribbble</a></li>
+                        <li><a href="#"><i class="fa fa-pinterest"></i> Pinterest</a></li>
+                    </ul><!-- end links -->
+                </div><!-- end clearfix -->
+            </div><!-- end col -->
+        
+        </div><!-- end row -->
+    </div><!-- end container -->
+</footer><!-- end footer -->
+
+
+<script>
+
+  $(document).ready(function(){
+    var loc=window.location.href.split("/");
+    var act =loc[loc.length-1];
+    $(".active").removeClass("active");
+    $("."+act).addClass("active");
+  });
+
+  $('#calendar').click(function() {
+        $('#date').datepicker({
+        altField: "#actualDate"
+    });
+        $('#date').datepicker("show");
+      });
+
+  function check(){
+  var a=document.getElementById("from-airport").value;
+  var b=document.getElementById("to-airport").value;
+  if (a==b){
+    alert("Source and destination cannot be same");
+  }
+  }
+</script>
+</body>
+</html>
