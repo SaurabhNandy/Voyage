@@ -17,6 +17,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'home.css') }} ">
+  {% if contact %}
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'contact.css') }} ">
+  {% endif %}
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>  
   <script type="text/javascript">
     $(document).ready(function(){
@@ -43,9 +46,9 @@
 
   <div class="collapse navbar-collapse my-2 my-lg-0 " id="navbarSupportedContent" style="z-index:1; background-color:#232f3e; ">
     <ul class="navbar-nav ml-auto ">
-      <li class="nav-item home {% if home %} {{ home }} {% endif %}" ><a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a></li>
-      <strong><li class="nav-item services"><a class="nav-link" href="services.html">Services</a></li></strong>
-      <strong><li class="nav-item contact"><a class="nav-link" href="contact.html">Contact Us</a></li></strong>
+      <strong><li class="nav-item home {% if home %} {{ home }} {% endif %}" ><a class="nav-link" href="http://127.0.0.1:5000/aviair/home">Home <span class="sr-only">(current)</span></a></li></strong>
+      <strong><li class="nav-item services {% if services %} {{ services }} {% endif %}"><a class="nav-link" href="services.html">Services</a></li></strong>
+      <strong><li class="nav-item contact {% if contact %} {{ contact }} {% endif %}"><a class="nav-link" href="http://127.0.0.1:5000/aviair/contact">Contact Us</a></li></strong>
       <strong><li class="nav-item faq"><a class="nav-link" href="faq.html">FAQs</a></li></strong>
       <strong><li class="nav-item dropdown register"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reg/Login</a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -137,11 +140,11 @@
 <script>
 
   $(document).ready(function(){
-    var loc=window.location.href.split("/");
+    /*var loc=window.location.href.split("/");
     var act =loc[loc.length-1];
     $(".active").removeClass("active");
     $("."+act).addClass("active");
-  });
+  });*/
 
   $('#calendar').click(function() {
         $('#date').datepicker({
