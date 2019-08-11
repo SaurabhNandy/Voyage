@@ -17,5 +17,11 @@ def home():
 def contact():
 	return render_template('contact.html',contact='active')
 
+
+@app.route('/aviair/register',methods = ['POST', 'GET'])
+@app.route('/aviair/login',methods = ['POST', 'GET'])
+def login_register():
+	return render_template('login.html',login='active')
+
 if __name__ == '__main__':
    app.run(debug=True)
