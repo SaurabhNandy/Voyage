@@ -1,15 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Mukta');
-body{
-  font-family: 'Mukta', sans-serif;
-    height:100vh;
-    min-height:550px;
-/*  background-image: url(http://www.planwallpaper.com/static/images/Free-Wallpaper-Nature-Scenes.jpg);
-*/  background-repeat: no-repeat;
-    background-size:cover;
-    background-position:center;
-    position:relative;
-    overflow-y: hidden;
-}
+
 .login-reg-panel a{
   text-decoration:none;
   color:#444444;
@@ -23,7 +13,9 @@ body{
     right:0;left:0;
     margin:auto;
     height:400px;
-    background-color: #137491;
+    background-color: #255669;
+    margin-bottom:15%;
+    margin-top:2%;
 }
 .white-panel{
     background-color: rgba(255,255, 255, 1);

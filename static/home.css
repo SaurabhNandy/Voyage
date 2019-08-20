@@ -2,9 +2,23 @@ body, html {
   height: 100%;
 }
 
+.spinner-wrapper {
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: #ff6347;
+background-image: url('https://cdn.dribbble.com/users/8106/screenshots/1297289/sp_loader.gif');
+width:100%;
+height:100%;
+z-index: 999999;
+}
+
+
 .parallax {
   /* The image used */
-  background-image: url('https://images7.alphacoders.com/382/382317.jpg');
+  background-image: url('https://images.wallpaperscraft.com/image/danbo_cardboard_robot_suitcase_122262_1920x1080.jpg');
   opacity:0.85;
   /* Full height */
   height: 100%; 
@@ -37,10 +51,11 @@ body, html {
   color: #ffffff;
 }
 
+
 .search-in{
-  border: 2px solid #232f3e;
-  border-radius: 1px;
-  border-color: #232f3e;
+  border: 2px solid #fff;
+  border-radius: 7px;
+  
 }
 .search-field{
   padding: 15px;
@@ -56,7 +71,7 @@ body, html {
   height:320px;
   background: #f7f4f4;
   border: 8px solid transparent;
-  border-color: #c32026;
+  border-color: #255669;
   text-align: center;
   padding: 30px 25px 45px 25px;
 }

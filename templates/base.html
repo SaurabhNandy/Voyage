@@ -20,6 +20,9 @@
   {% if contact %}
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'contact.css') }} ">
   {% endif %}
+  {% if login %}
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='login.css')}}">
+  {% endif %}
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>  
   <script type="text/javascript">
     $(document).ready(function(){
@@ -37,23 +40,26 @@
 
 
 <body>
+<div class="spinner-wrapperb">
+</div>
+
 <div class="aviair-navbar">
-<nav class="navbar navbar-expand-md navbar-light fixed-top" style="height:4rem; z-index: 1; background-color:#232f3e; ">
-  <a class="navbar-brand" href="#"><img src="https://airsewa.gov.in/assets/images/icn_connecting_flight.png"></a>
+<nav class="navbar navbar-expand-md navbar-light fixed-top " style="height:4rem; z-index: 1; background-color:#255669; ">
+  <a class="navbar-brand" href="#" ><img src="https://airsewa.gov.in/assets/images/icn_connecting_flight.png"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse my-2 my-lg-0 " id="navbarSupportedContent" style="z-index:1; background-color:#232f3e; ">
+  <div class="collapse navbar-collapse my-2 my-lg-0 " id="navbarSupportedContent" style="z-index:1; background-color:#255669; ">
     <ul class="navbar-nav ml-auto ">
-      <strong><li class="nav-item home {% if home %} {{ home }} {% endif %}" ><a class="nav-link" href="http://127.0.0.1:5000/aviair/home">Home <span class="sr-only">(current)</span></a></li></strong>
-      <strong><li class="nav-item services {% if services %} {{ services }} {% endif %}"><a class="nav-link" href="services.html">Services</a></li></strong>
-      <strong><li class="nav-item contact {% if contact %} {{ contact }} {% endif %}"><a class="nav-link" href="http://127.0.0.1:5000/aviair/contact">Contact Us</a></li></strong>
-      <strong><li class="nav-item faq"><a class="nav-link" href="faq.html">FAQs</a></li></strong>
-      <strong><li class="nav-item dropdown register"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reg/Login</a>
+      <strong><li class="nav-item home {% if home %} {{ home }} {% endif %}" ><a class="nav-link" href="http://127.0.0.1:5000/aviair/home" style="color:#fff;">Home <span class="sr-only">(current)</span></a></li></strong>
+      <strong><li class="nav-item services {% if services %} {{ services }} {% endif %}"><a class="nav-link" href="services.html" style="color:#fff;">Services</a></li></strong>
+      <strong><li class="nav-item contact {% if contact %} {{ contact }} {% endif %}"><a class="nav-link" href="http://127.0.0.1:5000/aviair/contact" style="color:#fff;">Contact Us</a></li></strong>
+      <strong><li class="nav-item faq"><a class="nav-link" href="faq.html" style="color:#fff;">FAQs</a></li></strong>
+      <strong><li class="nav-item dropdown register"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#fff;">Reg/Login</a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Register</a>
-          <a class="dropdown-item" href="#">Login</a>
+          <a class="dropdown-item" href="/aviair/register">Register</a>
+          <a class="dropdown-item" href="/aviair/login">Login</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">MyAccount</a>
         </div>
@@ -61,18 +67,18 @@
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <button class="btn  my-2 my-sm-0" type="submit" style="background-color: #255669; border-color:#F39C12;color:#F39C12">Search</button>
     </form>
   </div>
 </nav>
 </div>
 
-
 {% block content %}
 {% endblock content %}
 
 
-<footer class="footer bg-dark">
+<div style="position:relative; margin-top:10%">
+<footer class="footer bg-dark" >
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-sm-4 col-xs-12">
@@ -135,16 +141,12 @@
         </div><!-- end row -->
     </div><!-- end container -->
 </footer><!-- end footer -->
+</div>
 
 
 <script>
 
   $(document).ready(function(){
-    /*var loc=window.location.href.split("/");
-    var act =loc[loc.length-1];
-    $(".active").removeClass("active");
-    $("."+act).addClass("active");
-  });*/
 
   $('#calendar').click(function() {
         $('#date').datepicker({
@@ -152,13 +154,14 @@
     });
         $('#date').datepicker("show");
       });
+  });
 
   function check(){
   var a=document.getElementById("from-airport").value;
   var b=document.getElementById("to-airport").value;
   if (a==b){
     alert("Source and destination cannot be same");
-  }
+  };
   }
 </script>
 </body>

@@ -1,3 +1,21 @@
+.parallax {
+	/* The image used */
+	background-image: url('https://cdn7.dissolve.com/p/D23_39_905/D23_39_905_1200.jpg');
+	opacity:0.85;
+	/* Full height */
+	height: 100%; 
+  
+	/* Create the parallax scrolling effect */
+	background-attachment: fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+@media only screen and (max-device-width: 1366px) {
+	.parallax {
+	  background-attachment: scroll;
+	}
+}
 .contact-cont{
 	padding: 4%;
 	border-radius: 0.5rem;
