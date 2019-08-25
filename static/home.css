@@ -2,66 +2,17 @@ body, html {
   height: 100%;
 }
 
-.spinner-wrapper {
-position: fixed;
-top: 0;
-left: 0;
-right: 0;
-bottom: 0;
-background-color: #ff6347;
-background-image: url('https://cdn.dribbble.com/users/8106/screenshots/1297289/sp_loader.gif');
-width:100%;
-height:100%;
-z-index: 999999;
-}
-
-
-.parallax {
-  /* The image used */
-  background-image: url('https://images.wallpaperscraft.com/image/danbo_cardboard_robot_suitcase_122262_1920x1080.jpg');
-  opacity:0.85;
-  /* Full height */
-  height: 100%; 
-
-  /* Create the parallax scrolling effect */
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-/* Turn off parallax scrolling for tablets and phones. Increase the pixels if needed */
-@media only screen and (max-device-width: 1366px) {
-  .parallax {
-    background-attachment: scroll;
-  }
-}
-
 .nav-item.active{
   box-sizing: border-box;
   border-radius: 2px;
-  background-color: #F39C12;
-  color: #ffffff;
+  color: #4fa3e3;
 }
 
 .nav-item:hover{
   box-sizing: border-box;
-  border-radius: 2px;
-  background-color: #F39C12;
-  color: #ffffff;
+  border-radius: 2px;;
 }
 
-
-.search-in{
-  border: 2px solid #fff;
-  border-radius: 7px;
-  
-}
-.search-field{
-  padding: 15px;
-  width:80% ;
-  margin-left: 10%;
-}
 
 .about-box{
   padding: 70px 0px;
@@ -95,125 +46,268 @@ z-index: 999999;
   }
 }
 
-.main-title{
-  color: #2d2d2d;
-  text-align: center;
-  text-transform: capitalize;
-  padding: 0.7em 0;
-}
 
-.img-container{
-  padding-bottom: 2rem ;
-}
 
-.img-container .title{
-  color: #1a1a1a;
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-.content {
+.section {
   position: relative;
-  width: 90%;
-  max-width: 400px;
-  margin: auto;
-  overflow: hidden;
+  height: 100vh;
+  top:4rem;
 }
 
-.content .content-overlay {
-  background: rgba(0,0,0,0.7);
+.section .section-center {
   position: absolute;
-  height: 99%;
-  width: 100%;
+  top: 45%;
   left: 0;
-  top: 0;
-  bottom: 0;
   right: 0;
-  opacity: 0;
-  -webkit-transition: all 0.4s ease-in-out 0s;
-  -moz-transition: all 0.4s ease-in-out 0s;
-  transition: all 0.4s ease-in-out 0s;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 
-.content:hover .content-overlay{
-  opacity: 1;
+#booking {
+  font-family: 'Lato', sans-serif;
+  background-image: url('https://colorlib.com/etc/bforms/colorlib-booking-19/img/background.jpg');
+  background-size: cover;
+  background-position: center;
+  color: #191a1e;
 }
 
-.content-image{
+.booking-form {
+  position: relative;
+  background: #fff;
+  max-width: 642px;
   width: 100%;
+  margin: auto;
+  padding: 45px 25px 25px;
+  border-radius: 4px;
+  -webkit-box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
 }
 
-.content-details {
+.booking-form .form-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.booking-form .form-control {
+  background-color: #fff;
+  height: 65px;
+  padding: 0px 15px;
+  padding-top: 24px;
+  color: #191a1e;
+  border: 2px solid #dfe5e9;
+  font-size: 16px;
+  font-weight: 700;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-radius: 4px;
+  -webkit-transition: 0.2s all;
+  transition: 0.2s all;
+}
+
+.booking-form .form-control::-webkit-input-placeholder {
+  color: #dfe5e9;
+}
+
+.booking-form .form-control:-ms-input-placeholder {
+  color: #dfe5e9;
+}
+
+.booking-form .form-control::placeholder {
+  color: #dfe5e9;
+}
+
+.booking-form .form-control:focus {
+  background: #f9fafb;
+}
+
+.booking-form input[type="date"].form-control:invalid {
+  color: #dfe5e9;
+}
+
+.booking-form select.form-control {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.booking-form select.form-control+.select-arrow {
   position: absolute;
+  right: 6px;
+  bottom: 6px;
+  width: 32px;
+  line-height: 32px;
+  height: 32px;
   text-align: center;
-  padding-left: 1em;
-  padding-right: 1em;
-  width: 100%;
-  top: 50%;
-  left: 50%;
-  opacity: 0;
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  -webkit-transition: all 0.3s ease-in-out 0s;
-  -moz-transition: all 0.3s ease-in-out 0s;
-  transition: all 0.3s ease-in-out 0s;
+  pointer-events: none;
+  color: #dfe5e9;
+  font-size: 14px;
 }
 
-.content:hover .content-details{
-  top: 50%;
-  left: 50%;
-  opacity: 1;
+.booking-form select.form-control+.select-arrow:after {
+  content: '\279C';
+  display: block;
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
 }
 
-.content-details h3{
-  color: #fff;
-  font-weight: 500;
-  letter-spacing: 0.15em;
-  margin-bottom: 0.5em;
+.booking-form .form-label {
+  position: absolute;
+  top: 6px;
+  left: 20px;
+  font-weight: 700;
   text-transform: uppercase;
+  line-height: 24px;
+  height: 24px;
+  font-size: 12px;
+  color: #98c9ee;
 }
 
-.content-details p{
+.booking-form .form-checkbox input {
+  position: absolute !important;
+  margin-left: -9999px !important;
+  visibility: hidden !important;
+}
+
+.booking-form .form-checkbox label {
+  position: relative;
+  padding-top: 4px;
+  padding-left: 30px;
+  font-weight: 700;
+  color: #191a1e;
+}
+
+.booking-form .form-checkbox label+label {
+  margin-left: 15px;
+}
+
+.booking-form .form-checkbox input+span {
+  position: absolute;
+  left: 2px;
+  top: 4px;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border: 2px solid #dfe5e9;
+  border-radius: 50%;
+}
+
+.booking-form .form-checkbox input+span:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0px;
+  height: 0px;
+  border-radius: 50%;
+  background-color: #4fa3e3;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  -webkit-transition: 0.2s all;
+  transition: 0.2s all;
+}
+
+.booking-form .form-checkbox input:not(:checked)+span:after {
+  opacity: 0;
+}
+
+.booking-form .form-checkbox input:checked+span:after {
+  opacity: 1;
+  width: 10px;
+  height: 10px;
+}
+
+.booking-form .submit-btn {
   color: #fff;
-  font-size: 0.8em;
+  background-color: #4fa3e3;
+  font-weight: 400;
+  height: 65px;
+  font-size: 18px;
+  border: none;
+  width: 100%;
+  border-radius: 4px;
+  text-transform: uppercase
 }
 
-.fadeIn-bottom{
-  top: 80%;
+.booking-cta {
+  margin-top: 45px;
 }
 
-.fadeIn-top{
-  top: 20%;
+.booking-cta h1 {
+  font-size: 52px;
+  text-transform: uppercase;
+  color: #4fa3e3;
+  font-weight: 400;
 }
 
-.fadeIn-left{
-  left: 20%;
+.booking-cta p {
+  font-size: 22px;
+  color: #191a1e;
 }
 
-.fadeIn-right{
-  left: 80%;
+.dropdown-list{
+  display:none;
+  background-color: #f6f6f6;
+    overflow: auto;
+    border-bottom: 2px solid #4fa3e3;
+    border-left: 2px solid #4fa3e3;
+    border-right: 2px solid #4fa3e3;
+    border-radius: 5px;
+    max-height:10rem;
+    position:absolute;
+    z-index: 1;
+    width:100%;
+
 }
 
-@media screen and (max-width:767px){
-  .info{
-    text-align: center;
-  }
-  .info p{
-    display: none;
-  }
-  .info a{
-    display: none;
-  }
-  .search-form{
-    padding:auto;
-    width: 80%;
-    height:25rem;
-    margin-top:3%;
-    margin-left:10%;
-    margin-right: 10%;
-  }
-  .form-br{
-    display: none;
-  }
+.dropdown-list li {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  z-index: 1;
+  border-bottom: 1px solid #ddd;
+}
+
+.add-dropdown{
+  display:block;
+}
+
+@media screen and (max-width: 576px){
+.booking-form .form-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+.booking-form .form-control {
+  background-color: #fff;
+  height: 52px;
+  padding: 0px 15px;
+  padding-top: 24px;
+  color: #191a1e;
+  border: 2px solid #dfe5e9;
+  font-size: 16px;
+  font-weight: 700;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-radius: 4px;
+  -webkit-transition: 0.2s all;
+  transition: 0.2s all;
+}
+}
+
+@media screen and (max-width: 409px){
+  .booking-cta {
+  margin-top: 4rem;
+}
+
+.booking-cta h1 {
+  font-size: 44px;
+  text-transform: uppercase;
+  color: #4fa3e3;
+  font-weight: 400;
+}
+
+.booking-cta p {
+  font-size: 20px;
+  color: #191a1e;
+}
 }

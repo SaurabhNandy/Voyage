@@ -11,8 +11,6 @@
   <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
   <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
   <!-- select2 -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css" rel="stylesheet" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
     <!-- fa icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -24,33 +22,19 @@
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='login.css')}}">
   {% endif %}
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>  
-  <script type="text/javascript">
-    $(document).ready(function(){
-      $('.js-example-basic-from').select2({
-      placeholder: "From",
-      allowClear: true,
-      width:'resolve'});
-    $('.js-example-basic-to').select2({
-      placeholder: "To",
-      allowClear: true,
-      width:'resolve'});
-    });
-  </script>
 </head>
 
 
 <body>
-<div class="spinner-wrapperb">
-</div>
 
 <div class="aviair-navbar">
-<nav class="navbar navbar-expand-md navbar-light fixed-top " style="height:4rem; z-index: 1; background-color:#255669; ">
+<nav class="navbar navbar-expand-md navbar-light fixed-top bg-dark " style="height:4rem; z-index: 1; background-color:#4fa3e3; ">
   <a class="navbar-brand" href="#" ><img src="https://airsewa.gov.in/assets/images/icn_connecting_flight.png"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse my-2 my-lg-0 " id="navbarSupportedContent" style="z-index:1; background-color:#255669; ">
+  <div class="collapse navbar-collapse my-2 my-lg-0 bg-dark" id="navbarSupportedContent" style="z-index:1; background-color:#4fa3e3; ">
     <ul class="navbar-nav ml-auto ">
       <strong><li class="nav-item home {% if home %} {{ home }} {% endif %}" ><a class="nav-link" href="http://127.0.0.1:5000/aviair/home" style="color:#fff;">Home <span class="sr-only">(current)</span></a></li></strong>
       <strong><li class="nav-item services {% if services %} {{ services }} {% endif %}"><a class="nav-link" href="services.html" style="color:#fff;">Services</a></li></strong>
