@@ -1,0 +1,105 @@
+
+<html>
+    <head>
+        <title>Avi Air</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript" async></script>
+        <style type="text/css">
+        	body {
+  background-color: #000;
+}
+
+#landing-header {
+  z-index: 1;
+  position: relative;
+  text-align: center;
+  padding-top: 40vh;
+}
+
+#landing-header h1 {
+  color: #fff;
+}
+
+.slideshow { 
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.slideshow li { 
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  opacity: 0;
+  z-index: 0;
+  animation: imageAnimation 40s linear infinite; 
+}
+
+.slideshow li:nth-child(1) { 
+  background-image: url("https://images2.alphacoders.com/734/thumb-350-734981.jpg") 
+}
+.slideshow li:nth-child(2) { 
+  background-image: url("https://2.bp.blogspot.com/-xLJtpJ5NFTg/V26g-KMl2MI/AAAAAAAACYk/jv0HEV5wxRUXqvMfIgnmiWYczcvu4C4XACKgB/s1600/Airplane%2Bwallpaper%2BHD%2B1.jpg");
+  animation-delay: 10s; 
+}
+.slideshow li:nth-child(3) { 
+  background-image: url("https://free4kwallpapers.com/uploads/originals/2015/07/15/airplanes-sunset-with-aircraft-jet-hq-background-nice-hd.jpg");
+  animation-delay: 20s; 
+}
+.slideshow li:nth-child(4) { 
+  background-image: url("https://images7.alphacoders.com/399/thumb-1920-399085.jpg");
+  animation-delay: 30s; 
+}
+.slideshow li:nth-child(5) { 
+  background-image: url("https://hdqwalls.com/download/passenger-airplanes-clouds-5k-m7-3840x2400.jpg");
+  animation-delay: 40s; 
+}
+
+@keyframes imageAnimation { 
+  0% { 
+    opacity: 0; 
+    animation-timing-function: ease-in;
+  }
+  10% {
+    opacity: 1;
+    animation-timing-function: ease-out;
+  }
+  20% {
+    opacity: 1
+  }
+  30% {
+    opacity: 0
+  }
+}
+}
+        </style>
+    </head>
+    <body>
+
+    
+    <div id="landing-header">
+        <h1>Welcome to Avi Air</h1>
+        <a href="" class="btn btn-lg btn-success">Go To Site</a>
+    </div>
+      
+      <ul class="slideshow">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+
+   
