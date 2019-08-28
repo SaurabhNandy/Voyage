@@ -9,6 +9,7 @@ cur.execute("SELECT iata_code,name,location from airports ")
 airports=cur.fetchall()
 
 
+@app.route('/',methods = ['POST', 'GET'])
 @app.route('/aviair/home',methods = ['POST', 'GET'])
 def home():
 	if request.method=="POST":
