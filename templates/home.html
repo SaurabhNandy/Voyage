@@ -14,20 +14,16 @@
         </div>
         <div class=" col-md-6 ml-auto mr-auto col-sm-12 col-lg-6">
           <div class="booking-form">
-            <form>
+            <form method="post">
               <div class="form-group">
                 <div class="form-checkbox">
-                  <label for="roundtrip">
-                  <input type="radio" id="roundtrip" name="flight-type">
-                  <span></span>Roundtrip
-                  </label>
                   <label for="one-way">
-                  <input type="radio" id="one-way" name="flight-type">
+                  <input type="radio" id="one-way" name="flight-type" value="one-way" checked>
                   <span></span>One way
                   </label>
-                  <label for="multi-city">
-                  <input type="radio" id="multi-city" name="flight-type">
-                  <span></span>Multi-City
+                  <label for="roundtrip">
+                  <input type="radio" id="roundtrip" name="flight-type"  value="roundtrip" >
+                  <span></span>Roundtrip
                   </label>
                 </div>
               </div>
@@ -35,10 +31,10 @@
                 <div class="col-6">
                   <div class="form-group dropdown-content" id="myDropdown">
                     <span class="form-label">Flying from</span>
-                    <input type="text" class="form-control" placeholder="City or airport" id="from" onkeyup="filterFunction(this.id)" autocomplete="off">
+                    <input type="text" class="form-control" name="from-airport" placeholder="City or airport" id="from" onkeyup="filterFunction(this.id)" autocomplete="off" required>
                       <div class="dropdown-list " id="dropdown-list-from">
-                        {% for a in airports %}
-                          <li class="from" id="{{a}}" >{{a}}</li>
+                        {% for a,b,c in airports %}
+                          <li class="from" id="{{a}}">{{b}}, {{c}} ({{a}})</li>
                         {% endfor %}
                       </div>
                   </div>
@@ -46,10 +42,10 @@
                 <div class="col-6">
                   <div class="form-group">
                     <span class="form-label">Flying to</span>
-                    <input type="text" class="form-control" placeholder="City or airport" id="to" onkeyup="filterFunction(this.id)" autocomplete="off">
+                    <input type="text" class="form-control" name="to-airport" placeholder="City or airport" id="to" onkeyup="filterFunction(this.id)" autocomplete="off" required>
                       <div class="dropdown-list " id="dropdown-list-to">
-                          {% for a in airports %}
-                          <li class="to" id="{{a}}" >{{a}}</li>
+                          {% for a,b,c in airports %}
+                          <li class="to" id="{{a}}" >{{b}}, {{c}} ({{a}})</li>
                         {% endfor %}
                       </div>
                   </div>
@@ -59,13 +55,13 @@
                 <div class="col-6">
                   <div class="form-group">
                   <span class="form-label">Departing</span>
-                  <input class="form-control" type="date" required>
+                  <input class="form-control" type="text" id="departure" placeholder="dd/mm/yyyy" name="departing" required>
                   </div>
                 </div>
                 <div class="col-6">
                   <div class="form-group">
                   <span class="form-label">Returning</span>
-                  <input class="form-control" type="date" required>
+                  <input class="form-control" type="text" id="returning" placeholder="dd/mm/yyyy" name="returning" required>
                   </div>
                 </div>
               </div>
@@ -73,7 +69,7 @@
                 <div class="col-4">
                   <div class="form-group">
                     <span class="form-label">Adults (18+)</span>
-                    <select class="form-control">
+                    <select class="form-control" name="adults" required>
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
@@ -84,7 +80,7 @@
                 <div class="col-4">
                   <div class="form-group">
                     <span class="form-label">Children (0-17)</span>
-                    <select class="form-control">
+                    <select class="form-control" name="children" required>
                     <option>0</option>
                     <option>1</option>
                     <option>2</option>
@@ -95,7 +91,7 @@
                 <div class="col-4">
                   <div class="form-group">
                     <span class="form-label">Travel class</span>
-                    <select class="form-control">
+                    <select class="form-control" name="class" required>
                     <option>Economy</option>
                     <option>Business</option>
                     <option>First class</option>
@@ -105,7 +101,7 @@
                   </div>
                 </div>
             <div class="form-btn">
-            <button class="submit-btn">Show flights</button>
+            <button class="submit-btn" value="submit">Show flights</button>
             </div>
             </form>
           </div>
@@ -115,46 +111,90 @@
   </div>
 </div>
 
+<br><br>
+<div class="bg-dark" style="position:relative; height:20px; width:100%; "></div>
 
-<div class="bg-dark" style="height:20px; width:100%; "></div>
-
-
-<div class="col-md-10 ml-auto mr-auto mt-6" style="margin-top: 100px">
-	<div class="row">
-		<div class="item col-md-4 col-xs-12">
-			<div class="single-feature bg-light">
-				<div class="icon"><i class="fa fa-gift" aria-hidden="true" style="font-size: 70px"></i></div>
-					<h4><a href="#">Best Deals</a></h4>
-					<p>Gets the most amazing discounts on your flight bookings from AviAIR. Also get assured AviCOINS on every booking here! </p>
-				</div>
-		</div>
-
-		<div class="item col-md-4 col-xs-12">
-			<div class="single-feature bg-light">
-				<div class="icon"><i class="fa fa-plane" aria-hidden="true" style="font-size: 70px"></i></div>
-					<h4><a href="#">Flight Updates</a></h4>
-					<p>Get updates about your bookings and flight status on the go. </p>
-				</div>
-		</div>	
-
-		<div class="item col-md-4 col-xs-12">
-			<div class="single-feature bg-light">
-				<div class="icon"><i class="fa fa-phone" aria-hidden="true" style="font-size: 70px"></i></div>
-					<h4><a href="#">24/7 Premium Support</a></h4>
-					<p>Address all your issues to professionals who will readily help you for free and at any time, 24/7. </p>
-				</div>
-		</div>
-    <!-- can add more like groups/agents, preferred seats-->
-		
-	</div>
+<div class="container col-md-10 ml-auto mr-auto main-container">
+  <div class="service-container">
+    <h2>Our Services<i class="fa fa-comment"></i></h2>
+    <p>Here are our latest services that we are currently offering</p>
+    <p>Why Us?? wanna know?</p>
+  </div>
+  <div class="service-container cf">
+    <!-- Course 1 -->
+    <div class="animation-element bounce-up cf">
+      <div class="subject development">
+        <div class="category-color"></div>
+        <div class="icon"><i class="fa fa-plane"></i></div>
+        <h3 class="title">Best Deals</h3>
+        <div class="content">Gets the most amazing discounts on your flight bookings from AviAIR. Also get assured AviCOINS on every booking here! </div>
+      </div>
+    </div>
+    <!-- Course 2 -->
+    <div class="animation-element bounce-up cf">
+      <div class="subject design">
+        <div class="category-color"></div>
+        <div class="icon"><i class="fa fa-pencil"></i></div>
+        <h3 class="title">Flight Updates</h3>
+        <div class="content">Get updates about your bookings and flight status on the go go go. </div>
+      </div>
+    </div>
+    <!-- Course 3 -->
+    <div class="animation-element bounce-up">
+      <div class="subject photography">
+        <div class="category-color"></div>
+        <div class="icon"><i class="fa fa-camera"></i></div>
+        <h3 class="title">24/7 Premium Support </h3>
+        <div class="content">Address all your issues to professionals who will readily help you for free and at any time, 24/7. </div>
+      </div>
+    </div>
+    <!-- Course 4 -->
+    <div class="animation-element bounce-up cf">
+      <div class="subject design">
+        <div class="category-color"></div>
+        <div class="icon"><i class="fa fa-pencil"></i></div>
+        <h3 class="title">Best Deals</h3>
+        <div class="content">Gets the most amazing discounts on your flight bookings from AviAIR. Also get assured AviCOINS on every booking here! </div>
+      </div>
+    </div>
+    <!-- Course 5 -->
+    <div class="animation-element bounce-up cf">
+      <div class="subject development">
+        <div class="category-color"></div>
+        <div class="icon"><i class="fa fa-cogs"></i></div>
+        <h3 class="title">Flight Updates</h3>
+        <div class="content">Get updates about your bookings and flight status on the go go go. </div>
+      </div>
+    </div>
+    <!-- Course 6 -->
+    <div class="animation-element bounce-up cf">
+      <div class="subject development">
+        <div class="category-color"></div>
+        <div class="icon"><i class="fa fa-cogs"></i></div>
+        <div class="header cf">
+          <h4 class="date"><i class="fa fa-calendar-o"></i> June, 2015</h4>
+          <h4 class="category"><i class="fa fa-folder-o"></i> Development</h4>
+        </div>
+        <h3 class="title">24/7 Premium Support </h3>
+        <div class="content">Address all your issues to professionals who will readily help you for free and at any time, 24/7. </div>
+        <div class="enrole">Enrole</div>
+      </div>
+    </div>
+  </div>
 </div>
 
 
 <script type="text/javascript">
+ $(function() {
+    $( "#departure" ).datepicker();
+    $( "#returning" ).datepicker();
+ });
+
   $(document).ready(function(){
     $(document).on("click","li",function(){
       if($(this).hasClass("from")){
         $("input#from").val($(this).html());
+        $("input#from").attr("value",$(this).attr("id"));
         $("#dropdown-list-from").hide();
       }
       else if($(this).hasClass("to")){
@@ -170,24 +210,76 @@
       $("#dropdown-list-to").toggle();
       $("#to").attr("placeholder","Search airports...");
     });
+
+    if($("#one-way").is(':checked')){
+        $("#returning").prop("disabled",true);
+    }
+    else if($("#roundtrip").is(':checked')){
+      $("#returning").prop("disabled",false);
+    };
+
+    $("input[type='radio']").on("click",function(){
+      if($("#one-way").is(':checked')){
+        $("#returning").prop("disabled",true);
+      }
+      else if($("#roundtrip").is(':checked')){
+        $("#returning").prop("disabled",false);
+      }
+  });
   });
 
-    function filterFunction(id){
-      if(document.getElementById("dropdown-list-"+id).style.display==""){
-        document.getElementById("dropdown-list-"+id).style.display="block";
-      }
-      div = document.getElementById("dropdown-list-"+id);
-      a = div.getElementsByTagName("li");
-      inp=document.getElementById(id).value.toLowerCase();
-      for ( var i = 0; i < a.length; i++) {
-        var txtValue = a[i].textContent || a[i].innerText;
-        if (txtValue.toLowerCase().indexOf(inp) > -1) {
-          a[i].style.display = "";
-        } else {
-          a[i].style.display = "none";
-        }
+ 
+
+  function filterFunction(id){
+    if(document.getElementById("dropdown-list-"+id).style.display==""){
+      document.getElementById("dropdown-list-"+id).style.display="block";
     }
-  }
+    if(id=="to" && document.getElementById("from").value!=""){
+      var exclude=document.getElementById("from").value.toLowerCase();
+    }
+    else if(id=="from" && document.getElementById("to").value!=" "){
+      var exclude=document.getElementById("to").value.toLowerCase();
+    }
+    console.log(exclude);
+    div = document.getElementById("dropdown-list-"+id);
+    a = div.getElementsByTagName("li");
+    inp=document.getElementById(id).value.toLowerCase();
+    for ( var i = 0; i < a.length; i++) {
+      var txtValue = a[i].textContent || a[i].innerText;
+      if (txtValue.toLowerCase().indexOf(inp) > -1 && txtValue.toLowerCase()!=exclude) {
+        a[i].style.display = "";
+      } else {
+        a[i].style.display = "none";
+      }
+    }
+  };
+
+    var $animation_elements = $('.animation-element');
+    var $window = $(window);
+
+    function check_if_in_view() {
+      var window_height = $window.height();
+      var window_top_position = $window.scrollTop();
+      var window_bottom_position = (window_top_position + window_height);
+
+      $.each($animation_elements, function() {
+        var $element = $(this);
+        var element_height = $element.outerHeight();
+        var element_top_position = $element.offset().top;
+        var element_bottom_position = (element_top_position + element_height);
+
+        //check to see if this current container is within viewport
+        if ((element_bottom_position >= window_top_position) &&
+          (element_top_position <= window_bottom_position)) {
+          $element.addClass('in-view');
+        } else {
+          $element.removeClass('in-view');
+        }
+      });
+    }
+
+  $window.on('scroll resize', check_if_in_view);
+  $window.trigger('scroll');
 </script>
 
 {% endblock content %}

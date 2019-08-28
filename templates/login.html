@@ -17,21 +17,26 @@
                         
     <div class="white-panel ">
         <div class="login-show">
+            <form method="post">
             <h2>LOGIN</h2>
-            <input type="text" placeholder="Email">
-            <input type="password" placeholder="Password">
-            <input type="button" value="Login">
+            <input type="text" placeholder="Username" name="username">
+            <input type="password" placeholder="Password" name="password">
+            <input type="submit" value="Login" name="login" id="login">
             <a class="forgot" href="">Forgot password?</a>
-            <a class="small-screen-login" href="./register">Dont have an account?</a>
+            <a class="small-screen-login" href="./login">Dont have an account?</a>
+            </form>
         </div>
         <div class="register-show" >
+            <form method="post">
             <h2>REGISTER</h2>
-            <input type="text" placeholder="Email">
-            <input type="text" placeholder="Enter Username">
-            <input type="password" placeholder="Password">
-            <input type="password" placeholder="Confirm Password">
-            <input type="button" value="Register">
-            <a class="small-screen-register" href="./login">Have an account?</a>
+            <input type="text" placeholder="Enter Fullname" name="fullname">
+            <input type="text" placeholder="Enter Username" name="username" id="reg-uname">
+            <span id="username-info" class=" username-info alert alert-danger">Username already taken</span>
+            <input type="email" placeholder="Email" name="email">
+            <input type="password" placeholder="Password" name="password">
+            <input type="submit" value="Register" name="register" id="register">
+            <a class="small-screen-register" href="./register">Have an account?</a>
+            </form>
         </div>
     </div>
 </div>
@@ -57,6 +62,20 @@
         $('.register-show').addClass('show-log-panel');
         $('.login-show').removeClass('show-log-panel');
     }
+
+        {% if usernames %}
+        users={{usernames|tojson|safe}};
+        {% endif %}
+        $("#reg-uname").on("change",function(){
+            if(users.indexOf($("#reg-uname").val())!=-1){
+                $(".username-info").css('display','block');
+                $("#register").prop("disabled",true);
+            }
+            else{
+                $(".username-info").css('display','none');
+                $("#register").prop("disabled",false);
+            }
+        });
 });
 
 
@@ -79,6 +98,7 @@ $('.login-reg-panel input[type="radio"]').on('change', function() {
         $('.register-show').removeClass('show-log-panel');
     }
 });
+
 
 </script>
 

@@ -79,7 +79,7 @@
     display:block;
     opacity:0.9;
 }
-.login-show input[type="text"], .login-show input[type="password"]{
+.login-show input[type="text"], .login-show input[type="password"],.login-show input[type="email"] {
     width: 100%;
     display: block;
     margin:20px 0;
@@ -87,7 +87,7 @@
     border: 1px solid #b5b5b5;
     outline: none;
 }
-.login-show input[type="button"] {
+.login-show input[type="submit"] {
     max-width: 150px;
     width: 100%;
     background: #444444;
@@ -104,7 +104,7 @@
     padding:10px 0;
 }
 
-.register-show input[type="text"], .register-show input[type="password"]{
+.register-show input[type="text"], .register-show input[type="password"], .register-show input[type="email"]{
     width: 100%;
     display: block;
     margin:20px 0;
@@ -112,7 +112,7 @@
     border: 1px solid #b5b5b5;
     outline: none;
 }
-.register-show input[type="button"] {
+.register-show input[type="submit"] {
     max-width: 150px;
     width: 100%;
     background: #444444;
@@ -193,4 +193,11 @@
     .small-screen-register{
         display:block;
     }
+}
+.username-info{
+    position:absolute; 
+    z-index: 1;
+    display:none;
+    font-size: 10px;
+    font-weight: 100;
 }
