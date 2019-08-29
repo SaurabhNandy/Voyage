@@ -3,7 +3,7 @@ import psycopg2, json
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
-con = psycopg2.connect("dbname='airlines' user='postgres' host='localhost' password=''")
+con = psycopg2.connect("dbname='airlines' user='postgres' host='localhost' password='Saurabh@12'")
 cur=con.cursor()
 cur.execute("SELECT iata_code,name,location from airports ")
 airports=cur.fetchall()
