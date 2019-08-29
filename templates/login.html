@@ -29,11 +29,11 @@
         <div class="register-show" >
             <form method="post">
             <h2>REGISTER</h2>
-            <input type="text" placeholder="Enter Fullname" name="fullname">
-            <input type="text" placeholder="Enter Username" name="username" id="reg-uname">
+            <input type="text" placeholder="Enter Fullname" name="fullname" autocomplete="off">
+            <input type="text" placeholder="Enter Username" name="username" id="reg-uname" autocomplete="off">
             <span id="username-info" class=" username-info alert alert-danger">Username already taken</span>
-            <input type="email" placeholder="Email" name="email">
-            <input type="password" placeholder="Password" name="password">
+            <input type="email" placeholder="Email" name="email" autocomplete="off">
+            <input type="password" placeholder="Password" name="password" autocomplete="off">
             <input type="submit" value="Register" name="register" id="register">
             <a class="small-screen-register" href="./register">Have an account?</a>
             </form>
@@ -63,18 +63,22 @@
         $('.login-show').removeClass('show-log-panel');
     }
 
-        {% if usernames %}
-        users={{usernames|tojson|safe}};
-        {% endif %}
+
         $("#reg-uname").on("change",function(){
-            if(users.indexOf($("#reg-uname").val())!=-1){
-                $(".username-info").css('display','block');
-                $("#register").prop("disabled",true);
-            }
-            else{
-                $(".username-info").css('display','none');
-                $("#register").prop("disabled",false);
-            }
+            $.get("{{url_for('getUsernames')}}",function(data,status){
+                users=JSON.parse(data);
+                console.log(users);
+                console.log(typeof(users));
+                console.log(users.indexOf($("#reg-uname").val()));
+                if(users.indexOf($("#reg-uname").val())!=-1){
+                    $(".username-info").css('display','block');
+                    $("#register").prop("disabled",true);
+                }
+                else{
+                    $(".username-info").css('display','none');
+                    $("#register").prop("disabled",false);
+                }
+            });
         });
 });
 

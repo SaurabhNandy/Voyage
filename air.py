@@ -23,6 +23,13 @@ def searchFlights():
 	print(request.args['data'])
 	return render_template('tickets.html',)
 
+@app.route('/aviair/getusernames',methods = ['POST', 'GET'])
+def getUsernames():
+	cur.execute("SELECT u_name FROM users")
+	usernames=cur.fetchall()
+	usernames=[u[0] for u in usernames]
+	return json.dumps(usernames)
+
 
 @app.route('/aviair/contact',methods = ['POST', 'GET'])
 def contact():
@@ -34,9 +41,6 @@ def contact():
 def login():
 	con = psycopg2.connect("dbname='airlines' user='postgres' host='localhost' password='Saurabh@12'")
 	cur=con.cursor()
-	cur.execute("SELECT u_name FROM users")
-	usernames=cur.fetchall()
-	usernames=[u[0] for u in usernames]
 	if request.method=="POST":
 		if 'login' in request.form:
 			uname=request.form['username']
@@ -66,7 +70,7 @@ def login():
 	con.commit()
 	cur.close()
 	con.close()
-	return render_template('login.html',login='active',usernames=usernames)
+	return render_template('login.html',login='active')
 
 
 @app.route('/aviair/logout',methods = ['POST', 'GET'])
