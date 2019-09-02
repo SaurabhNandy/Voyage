@@ -1,8 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{category}} alert-dismissible" style="z-index: 1; top:4rem;" >
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>{{category}}!</strong> {{message}}
+    </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
 
 <div class="login-reg-panel">
+
     <div class="login-info-box ">
         <h2>Have an <br>account?</h2>
         <label id="label-register" for="log-reg-show">Login</label>

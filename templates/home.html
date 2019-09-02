@@ -3,6 +3,16 @@
 {% block content %}
 
 <div id="booking" class="section">
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{category}} alert-dismissible" style="z-index: 1;" >
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>{{message}}</strong> 
+    </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
   <div class="section-center">
     <div class="container">
       <div class="row">
@@ -32,10 +42,8 @@
                   <div class="form-group dropdown-content" id="myDropdown">
                     <span class="form-label">Flying from</span>
                     <input type="text" class="form-control" name="from-airport" placeholder="City or airport" id="from" onkeyup="filterFunction(this.id)" autocomplete="off" required>
-                      <div class="dropdown-list " id="dropdown-list-from">
-                        {% for a,b,c in airports %}
-                          <li class="from" id="{{a}}">{{b}}, {{c}} ({{a}})</li>
-                        {% endfor %}
+                      <div class="dropdown-list " id="dropdown-list-from" >
+                      
                       </div>
                   </div>
                 </div>
@@ -43,10 +51,8 @@
                   <div class="form-group">
                     <span class="form-label">Flying to</span>
                     <input type="text" class="form-control" name="to-airport" placeholder="City or airport" id="to" onkeyup="filterFunction(this.id)" autocomplete="off" required>
-                      <div class="dropdown-list " id="dropdown-list-to">
-                          {% for a,b,c in airports %}
-                          <li class="to" id="{{a}}" >{{b}}, {{c}} ({{a}})</li>
-                        {% endfor %}
+                      <div class="dropdown-list " id="dropdown-list-to" style="display: none;">
+
                       </div>
                   </div>
                 </div>
@@ -112,102 +118,226 @@
 </div>
 
 <br><br>
-<div class="bg-dark" style="position:relative; height:20px; width:100%; "></div>
+<div class="bg-dark" style="position:relative; height:20px; width:100%; margin-bottom: 7%;margin-top: 7%;"></div>
 
-<div class="container col-md-10 ml-auto mr-auto main-container">
-  <div class="service-container">
-    <h2>Our Services<i class="fa fa-comment"></i></h2>
-    <p>Here are our latest services that we are currently offering</p>
-    <p>Why Us?? wanna know?</p>
-  </div>
-  <div class="service-container cf">
-    <!-- Course 1 -->
-    <div class="animation-element bounce-up cf">
-      <div class="subject development">
-        <div class="category-color"></div>
-        <div class="icon"><i class="fa fa-plane"></i></div>
-        <h3 class="title">Best Deals</h3>
-        <div class="content">Gets the most amazing discounts on your flight bookings from AviAIR. Also get assured AviCOINS on every booking here! </div>
-      </div>
-    </div>
-    <!-- Course 2 -->
-    <div class="animation-element bounce-up cf">
-      <div class="subject design">
-        <div class="category-color"></div>
-        <div class="icon"><i class="fa fa-pencil"></i></div>
-        <h3 class="title">Flight Updates</h3>
-        <div class="content">Get updates about your bookings and flight status on the go go go. </div>
-      </div>
-    </div>
-    <!-- Course 3 -->
-    <div class="animation-element bounce-up">
-      <div class="subject photography">
-        <div class="category-color"></div>
-        <div class="icon"><i class="fa fa-camera"></i></div>
-        <h3 class="title">24/7 Premium Support </h3>
-        <div class="content">Address all your issues to professionals who will readily help you for free and at any time, 24/7. </div>
-      </div>
-    </div>
-    <!-- Course 4 -->
-    <div class="animation-element bounce-up cf">
-      <div class="subject design">
-        <div class="category-color"></div>
-        <div class="icon"><i class="fa fa-pencil"></i></div>
-        <h3 class="title">Best Deals</h3>
-        <div class="content">Gets the most amazing discounts on your flight bookings from AviAIR. Also get assured AviCOINS on every booking here! </div>
-      </div>
-    </div>
-    <!-- Course 5 -->
-    <div class="animation-element bounce-up cf">
-      <div class="subject development">
-        <div class="category-color"></div>
-        <div class="icon"><i class="fa fa-cogs"></i></div>
-        <h3 class="title">Flight Updates</h3>
-        <div class="content">Get updates about your bookings and flight status on the go go go. </div>
-      </div>
-    </div>
-    <!-- Course 6 -->
-    <div class="animation-element bounce-up cf">
-      <div class="subject development">
-        <div class="category-color"></div>
-        <div class="icon"><i class="fa fa-cogs"></i></div>
-        <div class="header cf">
-          <h4 class="date"><i class="fa fa-calendar-o"></i> June, 2015</h4>
-          <h4 class="category"><i class="fa fa-folder-o"></i> Development</h4>
+
+<div class="social-box">
+    <div class="container">
+        <div class="heads ">
+            <h1>Our Services</h1> 
         </div>
-        <h3 class="title">24/7 Premium Support </h3>
-        <div class="content">Address all your issues to professionals who will readily help you for free and at any time, 24/7. </div>
-        <div class="enrole">Enrole</div>
-      </div>
+      <div class="row">
+          <div class="a col-lg-4 col-md-6 col-sm-6 col-xs-12 text-center">
+          <div class="box">
+                <i class="fa fa-behance fa-3x" aria-hidden="true"></i>
+            <div class="box-title">
+              <h3>Best Deals</h3>
+            </div>
+            <div class="box-text">
+              <span>Gets the most amazing discounts on your flight bookings from AviAIR.</span>
+            </div>
+            <div class="box-btn">
+                <a href="#">Learn More</a>
+            </div>
+           </div>
+        </div>   
+        
+         <div class="a col-lg-4 col-md-6 col-sm-6 col-xs-12  text-center">
+          <div class="box">
+              <i class="fa fa-twitter fa-3x" aria-hidden="true"></i>
+            <div class="box-title">
+              <h3>Timely Updates</h3>
+            </div>
+            <div class="box-text">
+              <span>Get updates about your bookings and flight status on the go go go. </span>
+            </div>
+            <div class="box-btn">
+                <a href="#">Learn More</a>
+            </div>
+           </div>
+        </div>   
+        
+         <div class="a col-lg-4 col-md-6 col-sm-6 col-xs-12 text-center">
+          <div class="box">
+                        <i class="fa fa-facebook fa-3x" aria-hidden="true"></i>
+            <div class="box-title">
+              <h3>24/7 Premium support</h3>
+            </div>
+            <div class="box-text">
+              <span>Address all your issues to professionals who will readily help you for free and at any time, 24/7. </span>
+            </div>
+            <div class="box-btn">
+                <a href="#">Learn More</a>
+            </div>
+           </div>
+        </div>   
+        
+        <div class="a col-lg-4 col-md-6 col-sm-6 col-xs-12 text-center">
+          <div class="box">
+                        <i class="fa fa-pinterest-p fa-3x" aria-hidden="true"></i>
+            <div class="box-title">
+              <h3>Vcoins</h3>
+            </div>
+            <div class="box-text">
+              <span>Get assured Vcoins on every booking here which can be redeemed later for future bookings! </span>
+            </div>
+            <div class="box-btn">
+                <a href="#">Learn More</a>
+            </div>
+           </div>
+        </div>   
+        
+         <div class="a col-lg-4 col-md-6 col-sm-6 col-xs-12 text-center">
+          <div class="box">
+              <i class="fa fa-google-plus fa-3x" aria-hidden="true"></i>
+            <div class="box-title">
+              <h3>Google</h3>
+            </div>
+            <div class="box-text">
+              <span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
+            </div>
+            <div class="box-btn">
+                <a href="#">Learn More</a>
+            </div>
+           </div>
+        </div>   
+        
+         <div class="a col-lg-4 col-md-6 col-sm-6 col-xs-12 text-center">
+          <div class="box">
+                        <i class="fa fa-github fa-3x" aria-hidden="true"></i>
+            <div class="box-title">
+              <h3>Github</h3>
+            </div>
+            <div class="box-text">
+              <span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
+            </div>
+            <div class="box-btn">
+                <a href="#">Learn More</a>
+            </div>
+           </div>
+        </div>
+    
+    </div>    
     </div>
-  </div>
 </div>
 
 
 <script type="text/javascript">
  $(function() {
-    $( "#departure" ).datepicker();
-    $( "#returning" ).datepicker();
+    var dateToday = new Date();
+    $( "#departure" ).datepicker({
+      minDate: 0
+    });
+    $( "#returning" ).datepicker({
+      minDate: 0
+    });
  });
 
+
   $(document).ready(function(){
+    airports={{airports|tojson|safe}};
+    var jbox1= new jBox('Tooltip', {
+      attach: '#from',
+      target: '#from',
+      theme: 'TooltipBorder',
+      trigger: 'keyup',
+      adjustTracker: true,
+      closeOnClick: 'body',
+      closeButton: 'box',
+      animation:{open: 'pulse', close: 'flip'},
+      position: {
+        x: 'left',
+        y: 'bottom'
+      },
+      outside: 'y',
+      pointer: 'left:20',
+      offset: {
+        x: 25
+      },
+      content:$('#dropdown-list-from'),
+      height:250,
+      responsiveWidth:true,
+      responsiveHeight:true,
+      onOpen: function() {
+        this.source.addClass('active');
+        inp=document.getElementById('from').value.toLowerCase();
+        var a='';
+        for(var i=0;i<airports.length;i++){
+          var temp='<li class="from" id="'+airports[i][0]+'">'+airports[i][1]+','+airports[i][2]+' ('+airports[i][0]+')</li>';
+          var txtValue=airports[i][1]+','+airports[i][2]+' ('+airports[i][0]+')';
+          if (txtValue.toLowerCase().indexOf(inp) > -1 && txtValue!=$("#to").val()) {
+            a+=temp;
+          }
+        };
+        if(a==''){
+          a="No Airports found";
+        }
+        this.setContent(a);
+      },
+      onClose: function() {
+        this.source.removeClass('active');
+      }
+    });
+
+    var jbox2= new jBox('Tooltip', {
+      attach: '#to',
+      target: '#to',
+      theme: 'TooltipBorder',
+      trigger: 'keyup',
+      adjustTracker:true,
+      closeOnClick: 'body',
+      closeButton: 'box',
+      animation:{open: 'pulse', close: 'flip'},
+      position: {
+        x: 'left',
+        y: 'bottom'
+      },
+      outside: 'y',
+      pointer: 'left:20',
+      offset: {
+        x: 25
+      },
+      content:$('#dropdown-list-to'),
+      height:250,
+      responsiveWidth:true,
+      responsiveHeight:true,
+      onOpen: function() {
+        this.source.addClass('active');
+        inp=document.getElementById('to').value.toLowerCase();
+        var a='';
+        for(var i=0;i<airports.length;i++){
+          var temp='<li class="to" id="'+airports[i][0]+'">'+airports[i][1]+','+airports[i][2]+' ('+airports[i][0]+')</li>';
+          var txtValue=airports[i][1]+','+airports[i][2]+' ('+airports[i][0]+')';
+          if (txtValue.toLowerCase().indexOf(inp) > -1 && txtValue!=$("#from").val()) {
+            a+=temp;
+          }
+        };
+        if(a==''){
+          a="No Airports found";
+        }
+        this.setContent(a);
+      },
+      onClose: function() {
+        this.source.removeClass('active');
+      }
+    });
+
     $(document).on("click","li",function(){
       if($(this).hasClass("from")){
         $("input#from").val($(this).html());
         $("input#from").attr("value",$(this).attr("id"));
-        $("#dropdown-list-from").hide();
+        jbox1.close();
       }
       else if($(this).hasClass("to")){
         $("input#to").val($(this).html());
-        $("#dropdown-list-to").hide();
+        $("input#to").attr("value",$(this).attr("id"));
+        jbox2.close();
       }
     });
     $("#from").click(function(){
-      $("#dropdown-list-from").toggle();
       $("#from").attr("placeholder","Search airports...");
     });
     $("#to").click(function(){
-      $("#dropdown-list-to").toggle();
       $("#to").attr("placeholder","Search airports...");
     });
 
@@ -226,35 +356,10 @@
         $("#returning").prop("disabled",false);
       }
   });
+
   });
 
- 
-
-  function filterFunction(id){
-    if(document.getElementById("dropdown-list-"+id).style.display==""){
-      document.getElementById("dropdown-list-"+id).style.display="block";
-    }
-    if(id=="to" && document.getElementById("from").value!=""){
-      var exclude=document.getElementById("from").value.toLowerCase();
-    }
-    else if(id=="from" && document.getElementById("to").value!=" "){
-      var exclude=document.getElementById("to").value.toLowerCase();
-    }
-    console.log(exclude);
-    div = document.getElementById("dropdown-list-"+id);
-    a = div.getElementsByTagName("li");
-    inp=document.getElementById(id).value.toLowerCase();
-    for ( var i = 0; i < a.length; i++) {
-      var txtValue = a[i].textContent || a[i].innerText;
-      if (txtValue.toLowerCase().indexOf(inp) > -1 && txtValue.toLowerCase()!=exclude) {
-        a[i].style.display = "";
-      } else {
-        a[i].style.display = "none";
-      }
-    }
-  };
-
-    var $animation_elements = $('.animation-element');
+    var $animation_elements = $('.a');
     var $window = $(window);
 
     function check_if_in_view() {
