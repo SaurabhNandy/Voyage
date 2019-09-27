@@ -3,7 +3,7 @@ import psycopg2, json
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
-con = psycopg2.connect("dbname='airlines' user='postgres' host='localhost' password='Saurabh@12'")
+con = psycopg2.connect("dbname='airlines' user='postgres' host='localhost' password=''")
 cur=con.cursor()
 cur.execute("SELECT iata_code,name,location from airports ")
 airports=cur.fetchall()
@@ -33,7 +33,7 @@ def contact():
 @app.route('/aviair/register',methods = ['POST', 'GET'])
 @app.route('/aviair/login',methods = ['POST', 'GET'])
 def login():
-	con = psycopg2.connect("dbname='airlines' user='postgres' host='localhost' password='Saurabh@12'")
+	con = psycopg2.connect("dbname='airlines' user='postgres' host='localhost' password=''")
 	cur=con.cursor()
 	if "username" in session:
 		data=[session["username"],session["fullname"],session["wallet"],session["vcoins"]]
