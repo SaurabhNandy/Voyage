@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect,url_for, session,flash
 import psycopg2, json
 
-app = Flask(__name__)
+app = Flask(__name__,static_url_path='/static')
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 con = psycopg2.connect("dbname='airlines' user='postgres' host='localhost' password='Saurabh@12'")
 cur=con.cursor()
@@ -30,11 +30,21 @@ def contact():
 	return render_template('contact.html',contact='active')
 
 
+@app.route('/aviair/profile',methods = ['POST', 'GET'])
+def profile():
+	if "username" in session:
+		cur.execute("SELECT u_name,name,email,wallet,phone,address,city,state,country,profilepic from Users where u_name=%s;",(session["username"],))
+		userdata=cur.fetchone()
+		print(userdata)
+		return render_template('profile.html',profile='active',userdata=userdata)
+	else:
+		flash('Please login to continue.. ','info')
+		return redirect(url_for('login'))
+
+
 @app.route('/aviair/register',methods = ['POST', 'GET'])
 @app.route('/aviair/login',methods = ['POST', 'GET'])
 def login():
-	con = psycopg2.connect("dbname='airlines' user='postgres' host='localhost' password='Saurabh@12'")
-	cur=con.cursor()
 	if "username" in session:
 		data=[session["username"],session["fullname"],session["wallet"],session["vcoins"]]
 		return redirect(url_for('home'))
@@ -42,11 +52,10 @@ def login():
 		if 'login' in request.form:
 			uname=request.form['username']
 			password=request.form['password']
-			cur.execute("SELECT * FROM (SELECT u_name, name, wallet FROM users WHERE u_name='"+uname+"' AND password=crypt('"+password+"',password)) AS s NATURAL JOIN regusers;")
+			cur.execute("SELECT * FROM (SELECT u_name, name, wallet FROM users WHERE u_name=%s AND password=crypt(%s,password)) AS s NATURAL JOIN regusers;",(uname,password,))
 			data=cur.fetchone()
-			con.commit()
-			cur.close()
-			con.close()
+			#cur.close()
+			#con.close()
 			print(data)
 			if data:
 				session["username"]=data[0]
@@ -65,15 +74,17 @@ def login():
 			email=request.form['email']
 			password=request.form['password']
 			print(request.form)
-			cur.execute("INSERT INTO Users(u_name,name,password,email) VALUES('"+uname+"','"+fname+"',crypt('"+password+"',gen_salt('bf')),'"+email+"');")
+			cur.execute("INSERT INTO Users(u_name,name,password,email) VALUES(%s,%s,crypt(%s,gen_salt('bf')),%s);",(uname,fname,password,email,))
 			con.commit()
-			cur.close()
-			con.close()
+			cur.execute("INSERT INTO regusers VALUES(%s,0);",(uname,))
+			con.commit()
+			#cur.close()
+			#con.close()
 			flash('Registration successful! Please login to continue','success')
 			return render_template('login.html',login='active')
-	con.commit()
-	cur.close()
-	con.close()
+	#con.commit()
+	#cur.close()
+	#con.close()
 	return render_template('login.html',login='active')
 
 
@@ -92,6 +103,7 @@ def logout():
 def searchFlights():
 	print(request.args['data'])
 	return render_template('tickets.html',)
+
 
 @app.route('/aviair/getusernames',methods = ['POST', 'GET'])
 def getUsernames():

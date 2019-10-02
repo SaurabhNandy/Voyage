@@ -1,0 +1,344 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!--https://www.codeply.com/go/xc8om4qRwG/bootstrap-4-user-profile-->
+	<div class="container col-12 mx-0 p-0" style="width:100%; overflow-x:hidden; top:4rem;">
+		<div class="row col-12 mx-0" style="background-image: url('/static/media/profileback.jpg'); height:150px;">
+
+		</div>
+		<div class="row my-2" >
+			<div class="col-lg-4 pull-lg-8 text-xs-center ml-auto">
+				<img class="img-fluid img-thumbnail rounded-circle" {% if userdata.9 %} src="/static/media/{{userdata.9}}" {% else %} src="/static/media/default.jpg" {% endif %} alt="avatar" style="width:300px;height:300px;">
+				<h6 class="m-t-2">Upload a different photo</h6>
+				<label class="custom-file">
+					<input type="file" id="file" class="custom-file-input">
+					<span class="custom-file-control">Choose file</span>
+				</label>
+			</div>
+			<div class="col-lg-8 push-lg-4">
+				<ul class="nav nav-tabs">
+					<li class="nav-item">
+						<a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Profile</a>
+					</li>
+					<li class="nav-item">
+						<a href="" data-target="#edit" data-toggle="tab" class="nav-link">Edit</a>
+					</li>
+					<li class="nav-item">
+						<a href="" data-target="#messages" data-toggle="tab" class="nav-link">Messages</a>
+					</li>
+					<li class="nav-item">
+						<a href="" data-target="#booking-history" data-toggle="tab" class="nav-link">Booking History</a>
+					</li>
+					
+				</ul>
+				<div class="tab-content pb-3">
+					<div class="tab-pane active" id="profile">
+							<h4 class="my-3">About</h4>
+						<div class="row ml-auto my-3">
+							
+							<div class="col-12 row" >
+								<div class="col-6">
+									<h4>UserName</h4>
+								</div>
+								<div class="col-6">{{userdata.0}}
+								</div><hr>
+								<div class="col-6">
+									<h4>Name</h4>
+								</div>
+								<div class="col-6">
+									<h4>{{userdata.1}}</h4>
+								</div><hr>
+								<div class="col-6">
+									<h4>Email</h4>	
+								</div>
+								<div class="col-6">
+									<h4>{{userdata.2}}</h4>
+								</div><hr>
+								<div class="col-6">
+									<h4>Phone</h4>
+								</div>
+								<div class="col-6">
+									<h4>{{userdata.4}}</h4>
+								</div>
+								<div class="col-6">
+									<h4>Address</h4>
+								</div>
+								<div class="col-6">
+									<h4>{{userdata.5}}</h4>
+								</div>
+								<div class="col-4">
+									<h4>City</h4>
+								</div>
+								<div class="col-4">
+									<h4>State</h4>
+								</div>
+								<div class="col-4">
+									<h4>Country</h4>
+								</div>
+								<div class="col-4">
+									<h4>{{userdata.6}}</h4>
+								</div>
+								<div class="col-4">
+									<h4>{{userdata.7}}</h4>
+								</div>
+								<div class="col-4">
+									<h4>{{userdata.8}}</h4>
+								</div>
+							</div>
+							<div class="col-md-12">
+								<hr>
+								<h4 class="m-t-2"><span class="fa fa-clock-o ion-clock pull-xs-right"></span> Recent Activity</h4>
+								<table class="table table-hover table-striped">
+									<tbody>                                    
+										<tr>
+											<td>
+												<strong>Abby</strong> joined ACME Project Team in <strong>`Collaboration`</strong>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<strong>Gary</strong> deleted My Board1 in <strong>`Discussions`</strong>
+											</td>
+	
+										</tr>
+										<tr>
+											<td>
+												<strong>Kensington</strong> deleted MyBoard3 in <strong>`Discussions`</strong>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<strong>John</strong> deleted My Board1 in <strong>`Discussions`</strong>
+											</td>
+	
+										</tr>
+										<tr>
+											<td>
+												<strong>Skell</strong> deleted his post Look at Why this is.. in <strong>`Discussions`</strong>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<!--/row-->
+					</div>
+
+					<div class="tab-pane" id="edit">
+							<h4 class="m-y-2">Edit Profile</h4>
+							<form role="form">
+								<div class="form-group row">
+									<label class="col-lg-3 col-form-label form-control-label">Name</label>
+									<div class="col-lg-9">
+										<input class="form-control" type="text" value="{{userdata.1}}">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-lg-3 col-form-label form-control-label">Email</label>
+									<div class="col-lg-9">
+										<input class="form-control" type="email" value="{{userdata.2}}">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-lg-3 col-form-label form-control-label">Phone</label>
+									<div class="col-lg-9">
+										<input class="form-control" type="text" value="{{userdata.4}}">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-lg-3 col-form-label form-control-label">Address</label>
+									<div class="col-lg-9">
+										<input class="form-control" type="url" value="{{userdata.5}}" placeholder="Street/Block">
+									</div>
+								</div>
+								
+								<div class="form-group row">
+									<label class="col-lg-3 col-form-label form-control-label"></label>
+									<div class="col-lg-3">
+										<input class="form-control" type="text" value="{{userdata.6}}" placeholder="City">
+									</div>
+									<div class="col-lg-3">
+										<input class="form-control" type="text" value="{{userdata.7}}" placeholder="State">
+									</div>
+									<div class="col-lg-3">
+										<input class="form-control" type="text" value="{{userdata.8}}" placeholder="Country">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-lg-3 col-form-label form-control-label">Username</label>
+									<div class="col-lg-9">
+										<input class="form-control" type="text" value="{{userdata.0}}" disabled>
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-lg-3 col-form-label form-control-label">Password</label>
+									<div class="col-lg-9">
+										<input class="form-control" type="password" placeholder="Enter New password">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-lg-3 col-form-label form-control-label">Confirm password</label>
+									<div class="col-lg-9">
+										<input class="form-control" type="password" placeholder="Re-enter New password">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-lg-3 col-form-label form-control-label"></label>
+									<div class="col-lg-9">
+										<input type="reset" class="btn btn-secondary" value="Cancel" data-target="#profile" data-toggle="tab">
+										<input type="button" class="btn btn-primary" value="Save Changes">
+									</div>
+								</div>
+							</form>
+						</div>
+
+					<div class="tab-pane" id="messages">
+						<h4 class="my-3">Recent Messages &amp; Notifications</h4>
+						<table class="table table-hover table-striped">
+							<tbody>                                    
+								<tr>
+									<td>
+									    Here is your a link to the latest summary report from the..<span class="float-right font-weight-bold"> ~ 3 hrs ago</span>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										There has been a request on your account since that was..<span class="float-right font-weight-bold"> ~ Yesterday</span>
+									</td>
+								</tr>
+								<tr>
+									<td>
+									   Porttitor vitae ultrices quis, dapibus id dolor. Morbi venenatis lacinia rhoncus.<span class=" float-right font-weight-bold"> ~ 9/10</span>  
+									</td>
+								</tr>
+								<tr>
+									<td>
+									   Vestibulum tincidunt ullamcorper eros eget luctus.<span class="float-right font-weight-bold"> ~ 9/4</span>  
+									</td>
+								</tr>
+							</tbody> 
+						</table>
+					</div>
+
+					<div class="tab-pane" id="booking-history">
+							<h4 class="my-3"><span class="fa fa-clock-o ion-clock pull-xs-right"></span>Your Activity</h4>
+							<table class="table table-hover table-striped">
+								<tbody>  
+									<tr>
+										<th>Sr. No.</th>
+										<th>PNR No.</th>
+										<th>From</th>
+										<th>To</th>
+										<th>Journey Date</th>
+										<th>Trans. Amount</th>
+										<th>Booking Status</th>
+									</tr>                                  
+									<tr>
+										<td>1</td>
+										<td>1234567890</a></td>
+										<td>BOM</td>
+										<td>AGR</td>
+										<td>13/09/2019</td>
+										<td>5,608</td>
+										<td><a href="" data-toggle="modal" data-target="#myModal">View details</a></td>	  
+										<div class="modal fade" id="myModal">
+											<div class="modal-dialog modal-dialog-centered modal-lg">
+												<div class="modal-content">
+													<div class="modal-header">
+													  <h4 class="modal-title">Your Ticket</h4>
+													  <button type="button" class="close" data-dismiss="modal">&times;</button>
+													</div>
+													<div class="modal-body">
+															<div class="container col-12 mx-auto" style="box-shadow: 0 0 6px #333;">
+																<div class="row">
+																	<div class="col-3 h-100" >
+																		<div class="col-12" style="font-size:40px">13 SEP</div> 
+																		<div class="col-12">
+																			<img class="img-fluid w-100" src="{{url_for('static',filename = 'media/booked.png')}}">
+																		</div>
+																	</div>
+																	<div class="col-5">
+																	PNR Number: 1234567890<br>
+																	Flight Number:<br>
+																	From:<br>
+																	Departure Time: <br>
+																	Adults:<br>
+																	Transaction Amount:
+																	</div>
+																	<div class="col-4">
+																	Transaction ID:<br>
+																	Booking Date: <br>
+																	To: <br>
+																	Arrival time:<br>
+																	Children:<br>
+																	Booking Status:
+																	</div>
+																</div>
+															</div> 
+														</div>
+													<div class="modal-footer mb-0">
+													  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</tr>
+
+									<tr>
+											<td>1</td>
+											<td>1234567890</a></td>
+											<td>BOM</td>
+											<td>AGR</td>
+											<td>13/09/2019</td>
+											<td>5,608</td>
+											<td><a href="" data-toggle="modal" data-target="#myModal1">View details</a></td>	  
+											<div class="modal fade" id="myModal1">
+                                                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                              <h4 class="modal-title">Your Ticket</h4>
+                                                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                    <div class="container col-12 mx-auto" style="box-shadow: 0 0 6px #333;">
+                                                                        <div class="row">
+                                                                            <div class="col-3 h-100" >
+                                                                                <div class="col-12" style="font-size:40px">13 SEP</div> 
+                                                                                <div class="col-12">
+                                                                                    <img class="img-fluid w-100" src="{{url_for('static',filename = 'media/cancelled.png')}}">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-5">
+                                                                            PNR Number: 1234567890<br>
+                                                                            Flight Number:<br>
+                                                                            From:<br>
+                                                                            Departure Time: <br>
+                                                                            Adults:<br>
+                                                                            Transaction Amount:
+                                                                            </div>
+                                                                            <div class="col-4">
+                                                                            Transaction ID:<br>
+                                                                            Booking Date: <br>
+                                                                            To: <br>
+                                                                            Arrival time:<br>
+                                                                            Children:<br>
+                                                                            Booking Status:
+                                                                            </div>
+                                                                        </div>
+                                                                    </div> 
+                                                                </div>
+                                                            <div class="modal-footer mb-0">
+                                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+										</tr>
+								</tbody> 
+							</table>
+						</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock content %}
