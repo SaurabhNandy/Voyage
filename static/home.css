@@ -16,6 +16,10 @@ body, html {
   border-radius: 2px;;
 }
 
+.active-link{
+  box-shadow:0 0 5px #fff;
+}
+
 .about-box{
   padding: 70px 0px;
 }
@@ -276,7 +280,7 @@ body, html {
 
 .social-box .box{
     background: #FFF;
-    border-radius: 10px; 
+    border-radius: ; 
     padding: 40px 10px;
     margin: 20px 0px;
     cursor: pointer;

@@ -11,7 +11,12 @@
     {% endfor %}
   {% endif %}
 {% endwith %}
-
+<style>
+    .uname-invalid{
+        border: 2px solid rgb(243, 29, 29);
+        box-shadow: 0 0 10px rgb(243, 29, 29);
+    }
+</style>
 <div class="login-reg-panel">
 
     <div class="login-info-box ">
@@ -78,15 +83,14 @@
         $("#reg-uname").on("change",function(){
             $.get("{{url_for('getUsernames')}}",function(data,status){
                 users=JSON.parse(data);
-                console.log(users);
-                console.log(typeof(users));
-                console.log(users.indexOf($("#reg-uname").val()));
                 if(users.indexOf($("#reg-uname").val())!=-1){
                     $(".username-info").css('display','block');
+                    $("#reg-uname").addClass('uname-invalid');
                     $("#register").prop("disabled",true);
                 }
                 else{
                     $(".username-info").css('display','none');
+                    $("#reg-uname").removeClass('uname-invalid');
                     $("#register").prop("disabled",false);
                 }
             });

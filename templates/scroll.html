@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- bootstrap4 -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.0.5/dist/jBox.all.min.js"></script>
+<link href="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.0.5/dist/jBox.all.min.css" rel="stylesheet">
+
+    <!-- fa icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.2/css/all.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.2/css/v4-shims.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>  
+
+</head>
+
+
+<body style=" margin-top:20%;">
+  <input type="text" name="thing" id="from" >
+  <div id="dropdown-list-from" style="display: none;">
+    hgxcgjklmnkbjvh
+  </div>
+</body>
+ 
+<script type="text/javascript">
+  $(document).ready(function(){
+    new jBox('Tooltip', {
+  attach: '#from',
+  target: '#dropdown-list-from',
+  theme: 'TooltipBorder',
+  trigger: 'click',
+  adjustTracker: true,
+  closeOnClick: 'body',
+  closeButton: 'box',
+  animation: 'move',
+  position: {
+    x: 'left',
+    y: 'top'
+  },
+  outside: 'y',
+  pointer: 'left:20',
+  offset: {
+    x: 25
+  },
+  content: $('#dropdown-list-from'),
+  onOpen: function() {
+    this.source.addClass('active');
+  },
+  onClose: function() {
+    this.source.removeClass('active');
+  }
+});
+  });
+</script>
+
+</html>

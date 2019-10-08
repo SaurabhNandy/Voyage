@@ -24,7 +24,7 @@
         </div>
         <div class=" col-md-6 ml-auto mr-auto col-sm-12 col-lg-6">
           <div class="booking-form">
-            <form method="post">
+            <form method="post" action="{{url_for('searchFlights')}}">
               <div class="form-group">
                 <div class="form-checkbox">
                   <label for="one-way">
@@ -75,7 +75,7 @@
                 <div class="col-4">
                   <div class="form-group">
                     <span class="form-label">Adults (18+)</span>
-                    <select class="form-control" name="adults" required>
+                    <select class="form-control custom-select" name="adults" required>
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
@@ -86,7 +86,7 @@
                 <div class="col-4">
                   <div class="form-group">
                     <span class="form-label">Children (0-17)</span>
-                    <select class="form-control" name="children" required>
+                    <select class="form-control custom-select" name="children" required>
                     <option>0</option>
                     <option>1</option>
                     <option>2</option>
@@ -97,7 +97,7 @@
                 <div class="col-4">
                   <div class="form-group">
                     <span class="form-label">Travel class</span>
-                    <select class="form-control" name="class" required>
+                    <select class="form-control custom-select" name="class" required>
                     <option>Economy</option>
                     <option>Business</option>
                     <option>First class</option>
@@ -129,7 +129,7 @@
       <div class="row">
           <div class="a col-lg-4 col-md-6 col-sm-6 col-xs-12 text-center">
           <div class="box">
-                <i class="fa fa-behance fa-3x" aria-hidden="true"></i>
+                <i class="fa fa-gift fa-3x" aria-hidden="true"></i>
             <div class="box-title">
               <h3>Best Deals</h3>
             </div>
@@ -144,7 +144,7 @@
         
          <div class="a col-lg-4 col-md-6 col-sm-6 col-xs-12  text-center">
           <div class="box">
-              <i class="fa fa-twitter fa-3x" aria-hidden="true"></i>
+              <i class="fa fa-commenting-o fa-3x" aria-hidden="true"></i>
             <div class="box-title">
               <h3>Timely Updates</h3>
             </div>
@@ -159,12 +159,12 @@
         
          <div class="a col-lg-4 col-md-6 col-sm-6 col-xs-12 text-center">
           <div class="box">
-                        <i class="fa fa-facebook fa-3x" aria-hidden="true"></i>
+                        <i class="fa fa-clock-o fa-3x" aria-hidden="true"></i>
             <div class="box-title">
-              <h3>24/7 Premium support</h3>
+              <h3>24/7 Support</h3>
             </div>
             <div class="box-text">
-              <span>Address all your issues to professionals who will readily help you for free and at any time, 24/7. </span>
+              <span>Address all your issues to professionals for free and at any time, 24/7. </span>
             </div>
             <div class="box-btn">
                 <a href="#">Learn More</a>
@@ -174,7 +174,7 @@
         
         <div class="a col-lg-4 col-md-6 col-sm-6 col-xs-12 text-center">
           <div class="box">
-                        <i class="fa fa-pinterest-p fa-3x" aria-hidden="true"></i>
+              <i class="fa fa-money fa-3x" aria-hidden="true"></i>
             <div class="box-title">
               <h3>Vcoins</h3>
             </div>

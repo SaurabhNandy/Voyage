@@ -1,9 +1,14 @@
 from flask import Flask, render_template, request, redirect,url_for, session,flash
-import psycopg2, json
+from werkzeug.utils import secure_filename
+import psycopg2, json, os
+
 
 app = Flask(__name__,static_url_path='/static')
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
-con = psycopg2.connect("dbname='airlines' user='postgres' host='localhost' password=''")
+app.config['UPLOAD_FOLDER'] ='static/media/profilepics'
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
+
+con = psycopg2.connect("dbname='airlines' user='postgres' host='localhost' password='Saurabh@12'")
 cur=con.cursor()
 cur.execute("SELECT iata_code,name,location from airports ")
 airports=cur.fetchall()
@@ -14,20 +19,15 @@ airports=cur.fetchall()
 def home():
 	if "username" in session:
 		data=[session["username"],session["fullname"],session["wallet"],session["vcoins"]]
-		if request.method=="POST":
-			return redirect(url_for('searchFlights',data=request.form))
-		else:
-			return render_template('home.html',home='active',airports=airports,userdata=data)
+		return render_template('home.html',home='active-link',airports=airports,userdata=data)
 	else:
-		if request.method=="POST":
-			return redirect(url_for('searchFlights',data=request.form))
-		else:
-			return render_template('home.html',home='active',airports=airports)
+		return render_template('home.html',home='active-link',airports=airports)
 
 
 @app.route('/aviair/contact',methods = ['POST', 'GET'])
 def contact():
-	return render_template('contact.html',contact='active')
+	data=[session["username"],session["fullname"],session["wallet"],session["vcoins"]]
+	return render_template('contact.html',contact='active-link',userdata=data)
 
 
 @app.route('/aviair/profile',methods = ['POST', 'GET'])
@@ -35,11 +35,35 @@ def profile():
 	if "username" in session:
 		cur.execute("SELECT u_name,name,email,wallet,phone,address,city,state,country,profilepic from Users where u_name=%s;",(session["username"],))
 		userdata=cur.fetchone()
-		print(userdata)
-		return render_template('profile.html',profile='active',userdata=userdata)
+		return render_template('profile.html',profile='active-link',userdata=userdata)
 	else:
 		flash('Please login to continue.. ','info')
 		return redirect(url_for('login'))
+
+
+@app.route('/aviair/update-profile/<username>',methods = ['POST'])
+def UpdateProfile(username):
+	if request.form['password']:		
+		cur.execute("UPDATE Users SET name=%s,password=crypt(%s,gen_salt('bf')),email=%s,phone=%s,address=%s,city=%s,state=%s,country=%s WHERE u_name=%s;",(request.form['fname'],request.form['password'],request.form['email'],request.form['phone'],request.form['address'],request.form['city'],request.form['state'],request.form['country'],username,))
+		con.commit()
+	else:
+		cur.execute("UPDATE Users SET name=%s,email=%s,phone=%s,address=%s,city=%s,state=%s,country=%s WHERE u_name=%s;",(request.form['fname'],request.form['email'],request.form['phone'],request.form['address'],request.form['city'],request.form['state'],request.form['country'],username,))
+		con.commit()
+	return redirect(url_for('profile'))
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+        filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@app.route('/uploadprofilepic/<name>', methods=['POST'])
+def uploadProfilePic(name):
+	file = request.files['profile-filename']
+	if allowed_file(file.filename):
+		filename = secure_filename(file.filename)
+		file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+		cur.execute("UPDATE Users SET profilepic=%s WHERE u_name=%s;",(filename,name,))
+		return redirect(url_for('profile'))
 
 
 @app.route('/aviair/register',methods = ['POST', 'GET'])
@@ -66,7 +90,7 @@ def login():
 				return redirect(url_for('home'))
 			else:
 				flash('Invalid username or password. Please try again ','warning')
-				return render_template('login.html',login='active')
+				return render_template('login.html',login='active-link')
 		
 		elif 'register' in request.form:
 			uname=request.form['username']
@@ -81,11 +105,11 @@ def login():
 			#cur.close()
 			#con.close()
 			flash('Registration successful! Please login to continue','success')
-			return render_template('login.html',login='active')
+			return render_template('login.html',login='active-link')
 	#con.commit()
 	#cur.close()
 	#con.close()
-	return render_template('login.html',login='active')
+	return render_template('login.html',login='active-link')
 
 
 @app.route('/aviair/logout',methods = ['POST', 'GET'])
@@ -98,10 +122,9 @@ def logout():
 	return redirect(url_for('home'))
 
 
-
 @app.route('/aviair/search',methods = ['POST', 'GET'])
 def searchFlights():
-	print(request.args['data'])
+	print(request.form)
 	return render_template('tickets.html',)
 
 

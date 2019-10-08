@@ -1,19 +1,32 @@
 {% extends "base.html" %}
 
 {% block content %}
+<style>
+.pass-invalid{
+	border: 2px solid rgb(243, 29, 29);
+	box-shadow: 0 0 10px rgb(243, 29, 29);
+}
+.pass-valid{
+	border: 2px solid rgb(6, 204, 55);
+	box-shadow: 0 0 10px rgb(6, 204, 55);
+}
+</style>
 <!--https://www.codeply.com/go/xc8om4qRwG/bootstrap-4-user-profile-->
 	<div class="container col-12 mx-0 p-0" style="width:100%; overflow-x:hidden; top:4rem;">
 		<div class="row col-12 mx-0" style="background-image: url('/static/media/profileback.jpg'); height:150px;">
-
 		</div>
 		<div class="row my-2" >
 			<div class="col-lg-4 pull-lg-8 text-xs-center ml-auto">
-				<img class="img-fluid img-thumbnail rounded-circle" {% if userdata.9 %} src="/static/media/{{userdata.9}}" {% else %} src="/static/media/default.jpg" {% endif %} alt="avatar" style="width:300px;height:300px;">
-				<h6 class="m-t-2">Upload a different photo</h6>
-				<label class="custom-file">
-					<input type="file" id="file" class="custom-file-input">
-					<span class="custom-file-control">Choose file</span>
-				</label>
+				<img class="img-fluid img-thumbnail rounded-circle ml-2" {% if userdata.9 %} src="/static/media/profilepics/{{userdata.9}}" {% else %} src="/static/media/default.jpg" {% endif %} alt="avatar" style="width:300px;height:300px;">
+				<div class="custom-file mb-3 mt-3 ml-4 col-8">
+					<form method="post" enctype="multipart/form-data" id="profilepic-form" action="/uploadprofilepic/{{userdata.0}}">
+						<input type="file" class="custom-file-input" id="customFile" name="profile-filename" required>
+						<label class="custom-file-label" for="customFile">Upload different photo</label>
+						<div class="mt-3 ml-0">
+							<button type="submit" class="btn btn-primary">Upload</button>
+						</div>
+					</form>
+				</div>
 			</div>
 			<div class="col-lg-8 push-lg-4">
 				<ul class="nav nav-tabs">
@@ -126,67 +139,68 @@
 
 					<div class="tab-pane" id="edit">
 							<h4 class="m-y-2">Edit Profile</h4>
-							<form role="form">
+							<form role="update-form" action="./update-profile/{{userdata.0}}" method="POST">
 								<div class="form-group row">
 									<label class="col-lg-3 col-form-label form-control-label">Name</label>
 									<div class="col-lg-9">
-										<input class="form-control" type="text" value="{{userdata.1}}">
+										<input class="form-control" type="text" name="fname" value="{{userdata.1}}">
 									</div>
 								</div>
 								<div class="form-group row">
 									<label class="col-lg-3 col-form-label form-control-label">Email</label>
 									<div class="col-lg-9">
-										<input class="form-control" type="email" value="{{userdata.2}}">
+										<input class="form-control" type="email" name="email" value="{{userdata.2}}">
 									</div>
 								</div>
 								<div class="form-group row">
 									<label class="col-lg-3 col-form-label form-control-label">Phone</label>
 									<div class="col-lg-9">
-										<input class="form-control" type="text" value="{{userdata.4}}">
+										<input class="form-control" type="text"  name="phone" value="{{userdata.4}}">
 									</div>
 								</div>
 								<div class="form-group row">
 									<label class="col-lg-3 col-form-label form-control-label">Address</label>
 									<div class="col-lg-9">
-										<input class="form-control" type="url" value="{{userdata.5}}" placeholder="Street/Block">
+										<input class="form-control" type="text" name="address"  value="{{userdata.5}}" placeholder="Street/Block">
 									</div>
 								</div>
 								
 								<div class="form-group row">
 									<label class="col-lg-3 col-form-label form-control-label"></label>
 									<div class="col-lg-3">
-										<input class="form-control" type="text" value="{{userdata.6}}" placeholder="City">
+										<input class="form-control" type="text" name="city" value="{{userdata.6}}" placeholder="City">
 									</div>
 									<div class="col-lg-3">
-										<input class="form-control" type="text" value="{{userdata.7}}" placeholder="State">
+										<input class="form-control" type="text" name="state" value="{{userdata.7}}" placeholder="State">
 									</div>
 									<div class="col-lg-3">
-										<input class="form-control" type="text" value="{{userdata.8}}" placeholder="Country">
+										<input class="form-control" type="text" name="country" value="{{userdata.8}}" placeholder="Country">
 									</div>
 								</div>
 								<div class="form-group row">
 									<label class="col-lg-3 col-form-label form-control-label">Username</label>
 									<div class="col-lg-9">
-										<input class="form-control" type="text" value="{{userdata.0}}" disabled>
+										<input class="form-control" type="text" name="username" value="{{userdata.0}}" disabled>
 									</div>
 								</div>
 								<div class="form-group row">
 									<label class="col-lg-3 col-form-label form-control-label">Password</label>
 									<div class="col-lg-9">
-										<input class="form-control" type="password" placeholder="Enter New password">
+										<input class="form-control" type="password" id="password" name="password" placeholder="Enter New password">
 									</div>
 								</div>
 								<div class="form-group row">
 									<label class="col-lg-3 col-form-label form-control-label">Confirm password</label>
 									<div class="col-lg-9">
-										<input class="form-control" type="password" placeholder="Re-enter New password">
+										<input class="form-control" type="password" id="repassword" name="repassword" placeholder="Re-enter New password">
+										<p id="pass-error" style=""></p>
 									</div>
 								</div>
 								<div class="form-group row">
 									<label class="col-lg-3 col-form-label form-control-label"></label>
 									<div class="col-lg-9">
-										<input type="reset" class="btn btn-secondary" value="Cancel" data-target="#profile" data-toggle="tab">
-										<input type="button" class="btn btn-primary" value="Save Changes">
+										<input type="reset" class="btn btn-secondary" value="Cancel">
+										<input type="submit" id="update-btn" class="btn btn-primary" value="Save Changes">
 									</div>
 								</div>
 							</form>
@@ -341,4 +355,28 @@
 			</div>
 		</div>
 	</div>
+	<script>
+		$(document).ready(function(){
+			$('#repassword').on('keyup',function(){
+				if($('#password').val()!=$('#repassword').val()){
+					$('#repassword').addClass('pass-invalid');
+					$('#pass-error').text('Two passwords don\'t match');
+					$('#pass-error').css('color','rgb(243, 29, 29)');
+					$('#update-btn').attr('disabled',true);
+				}
+				else if($('#password').val()==$('#repassword').val()){
+					$('#password').addClass('pass-valid');
+					$('#repassword').removeClass('pass-invalid');
+					$('#repassword').addClass('pass-valid');
+					$('#pass-error').text('Valid');
+					$('#pass-error').css('color','rgb(6, 204, 55)');
+					$('#update-btn').attr('disabled',false);
+				}
+			});
+		});
+		$(".custom-file-input").on("change", function() {
+			var fileName = $(this).val().split("\\").pop();
+			$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+		});
+	</script>
 {% endblock content %}

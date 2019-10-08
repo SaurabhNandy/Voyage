@@ -44,14 +44,13 @@
 
   <div class="collapse navbar-collapse my-2 my-lg-0 " id="navbarSupportedContent" style="z-index:1; background-color: #3582B6; ">
     <ul class="navbar-nav ml-auto ">
-      <strong><li class="nav-item home {% if home %} {{ home }} {% endif %}" ><a class="nav-link" href="http://127.0.0.1:5000/aviair/home" style="color:#fff;">Book <span class="sr-only">(current)</span></a></li></strong>
+      <strong><li class="nav-item home {% if home %} {{ home }} {% endif %}" ><a class="nav-link" href="http://127.0.0.1:5000/aviair/home" style="color:#fff; ">Book <span class="sr-only">(current)</span></a></li></strong>
       <strong><li class="nav-item contact {% if contact %} {{ contact }} {% endif %}"><a class="nav-link" href="http://127.0.0.1:5000/aviair/contact" style="color:#fff;">Contact Us</a></li></strong>
 
       {% if userdata %}
-      <strong><li class="nav-item services {% if userdata %} {{ manage }} {% endif %}"><a class="nav-link" href="manage.html" style="color:#fff;">Manage</a></li></strong>
-      <strong><li class="nav-item faq"><a class="nav-link" href="{{url_for('profile')}}" style="color:#fff;">MyProfile</a></li></strong>
+      <strong><li class="nav-item faq {% if profile %} {{ profile }} {% endif %}"><a class="nav-link" href="{{url_for('profile')}}" style="color:#fff;">MyProfile</a></li></strong>
       <strong><li class="nav-item faq"><a class="nav-link" href="{{url_for('logout')}}" style="color:#fff;">Logout</a></li></strong>
-
+      <strong><li class="nav-item services"><a class="nav-link" style="color:#fff;">Welcome {{userdata.0}}</a></li></strong>
       {% else %}
       <strong><li class="nav-item faq"><a class="nav-link" href="/aviair/login" style="color:#fff;">Login</a></li></strong>
       <strong><li class="nav-item faq"><a class="nav-link" href="/aviair/register" style="color:#fff;">Register</a></li></strong>
@@ -78,10 +77,10 @@
       <div class="col-md-4 col-sm-6 col-xs-6" style="margin-top:20px">
         <!-- Content -->
           <div class="column" style="overflow:hidden;">
-            <pre style="color: white;">
-              CONTACT US 
-              K.J.SOMAIYA COLLEGE OF ENGINEERING,
-              Vidyanagar,Vidyavihar.
+            <pre style="color: white; font-size: 20px;">
+              FIND US AT<br> 
+              K.J.SOMAIYA COLLEGE OF ENGINEERING,<br>
+              Vidyanagar,Vidyavihar.<br>
               Mumbai-400077
             </pre>
           </div>
