@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- <div style="background-color:#555;">
+<div class="parallax" style="background-image:url('https://cdn7.dissolve.com/p/D23_39_905/D23_39_905_1200.jpg');">
+			
+		<div class="cen ml-auto mr-auto">			
+		<h1 class="centered">Frequently asked Questions</h1>
+		<input type="text" placeholder="Search.." name="search" class="col-md-5">
+      <button type="submit"><i class="fa fa-search"></i></button>
+				</div>
+</div>
+ -->
+ <div class="parallax" style="background-image: url();">
+
+ 	
+ </div>
+<br>
+<br>
+<br>
+<br>
+
+<h3 class="container ml-auto mr-auto">Common issues</h3>
+<hr>
+
+<div class="conatiner col-md-10 ml-auto mr-auto">
+		<div class="card " id="cardgrp0 ">
+			<div class="card-header accordion-toggle question-toggle collapsed" id="grp0" data-toggle="collapse" data-target="#grpbody0" onclick="setTimeout(change, 200,this.id)">
+				<span><li class="fa fa-angle-right" id="faicon-grp0"></li>     Baggage Allowance</span>
+			</div>
+			<div class="card-body collapse" id="grpbody0">
+				<div class="card">
+					<div class="card-header accordion-toggle question-toggle collapsed" data-toggle="collapse" data-target="#grp0q0">What if i exceed my free baggage weight allowance?</div>
+					<div class="card-body collapse" id="grp0q0"></div>
+				</div>
+				<div class="card">
+					<div class="card-header accordion-toggle question-toggle collapsed" data-toggle="collapse" data-target="#grp0q1">What all items are not permitted on the flight?</div>
+					<div class="card-body collapse" id="grp0q1"></div>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="card" id="cardgrp1">
+			<div class="card-header accordion-toggle question-toggle collapsed" id="grp1" data-toggle="collapse" data-target="#grpbody1" onclick="setTimeout(change, 200,this.id)">
+				<span><li class="fa fa-angle-right" id="faicon-grp1"></li>     Refunds</span>
+			</div>
+			<div class="card-body collapse" id="grpbody1">
+				<div class="card">
+					<div class="card-header accordion-toggle question-toggle collapsed" data-toggle="collapse" data-target="#grp1q0">How can a refund to my cancelled ticket be obtained?</div>
+					<div class="card-body collapse" id="grp1q0"></div>
+				</div>
+				<div class="card">
+					<div class="card-header accordion-toggle question-toggle collapsed" data-toggle="collapse" data-target="#grp1q1">How much amount will be refunded?</div>
+					<div class="card-body collapse" id="grp1q1"></div>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="card" id="cardgrp2">
+			<div class="card-header accordion-toggle question-toggle collapsed" id="grp2" data-toggle="collapse" data-target="#grpbody2" onclick="setTimeout(change, 200,this.id)">
+				<span><li class="fa fa-angle-right" id="faicon-grp2"></li>     Flight Delays/Cancellations</span>
+			</div>
+			<div class="card-body collapse" id="grpbody2">
+				<div class="card">
+					<div class="card-header accordion-toggle question-toggle collapsed" data-toggle="collapse" data-target="#grp2q0">Will I be contacted in advance if my flight is delayed or cancelled?</div>
+					<div class="card-body collapse" id="grp2q0"></div>
+				</div>
+				<div class="card">
+					<div class="card-header accordion-toggle question-toggle collapsed" data-toggle="collapse" data-target="#grp2q1">What are the flights policies if a flight is cancelled?</div>
+					<div class="card-body collapse" id="grp2q1"></div>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="card" id="cardgrp3">
+			<div class="card-header accordion-toggle question-toggle collapsed" id="grp3" data-toggle="collapse" data-target="#grpbody3" onclick="setTimeout(change, 200,this.id)">
+				<span><li class="fa fa-angle-right" id="faicon-grp3"></li>     Infants</span>
+			</div>
+			<div class="card-body collapse" id="grpbody3">
+				<div class="card">
+					<div class="card-header accordion-toggle question-toggle collapsed" data-toggle="collapse" data-target="#grp3q0">Do I need to book a seperate seat for infants?</div>
+					<div class="card-body collapse" id="grp3q0"></div>
+				</div>
+				<div class="card">
+					<div class="card-header accordion-toggle question-toggle collapsed" data-toggle="collapse" data-target="#grp3q1">What is the fare for infants on board?</div>
+					<div class="card-body collapse" id="grp3q1"></div>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="card" id="cardgrp4">
+			<div class="card-header accordion-toggle question-toggle collapsed" id="grp4" data-toggle="collapse" data-target="#grpbody4" onclick="setTimeout(change, 200,this.id)">
+				<span><li class="fa fa-angle-right" id="faicon-grp4"></li>     Lost/Mishandled Bags</span>
+			</div>
+			<div class="card-body collapse" id="grpbody4">
+				<div class="card">
+					<div class="card-header accordion-toggle question-toggle collapsed" data-toggle="collapse" data-target="#grp4q0">I have lost my baggage , what should I do?</div>
+					<div class="card-body collapse" id="grp4q0"></div>
+				</div>
+				<div class="card">
+					<div class="card-header accordion-toggle question-toggle collapsed" data-toggle="collapse" data-target="#grp4q1">My luggage has reached the destination but has been damaged,What do i do? </div>
+					<div class="card-body collapse" id="grp4q1"></div>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="card" id="cardgrp5">
+			<div class="card-header accordion-toggle question-toggle collapsed" id="grp5" data-toggle="collapse" data-target="#grpbody5" onclick="setTimeout(change, 200,this.id)">
+				<span><li class="fa fa-angle-right " id="faicon-grp5" ></li>     Passengers with special needs</span>
+			</div>
+			<div class="card-body collapse" id="grpbody5">
+				<div class="card">
+					<div class="card-header accordion-toggle question-toggle collapsed" data-toggle="collapse" data-target="#grp5q0">How can I opt for wheelchair assistance at the airport?</div>
+					<div class="card-body collapse" id="grp5q0"></div>
+				</div>
+				<div class="card">
+					<div class="card-header accordion-toggle question-toggle collapsed" data-toggle="collapse" data-target="#grp5q1">Do I need to inform the flight if I have any medical condition?</div>
+					<div class="card-body collapse" id="grp5q1"></div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+
+
+	<div class="container contact-cont">
+	<div class="row " style="border-radius: 0.5rem;">
+		<div class="col-md-4 contact-text">
+			<div class="contact-info">
+				<img src="https://colorlib.com/etc/cf/ContactFrom_v12/images/img-01.png" alt="image"/>
+				<h2>Contact Us</h2>
+				<h4>We would love to hear from you !</h4>
+			</div>
+		</div>
+		<div class="col-md-8 contact-form-cls">
+			<div class="contact-form">
+				<div class="form-group">
+				  <label class="control-label col-sm-2" for="fname">First Name:</label>
+				  <div class="col-sm-10">          
+					<input type="text" class="form-control" id="fname" placeholder="Enter First Name" name="fname">
+				  </div>
+				</div>
+				<div class="form-group">
+				  <label class="control-label col-sm-2" for="lname">Last Name:</label>
+				  <div class="col-sm-10">          
+					<input type="text" class="form-control" id="lname" placeholder="Enter Last Name" name="lname">
+				  </div>
+				</div>
+				<div class="form-group">
+				  <label class="control-label col-sm-2" for="email">Email:</label>
+				  <div class="col-sm-10">
+					<input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+				  </div>
+				</div>
+				<div class="form-group">
+				  <label class="control-label col-sm-2" for="comment">Comment:</label>
+				  <div class="col-sm-10">
+					<textarea class="form-control" rows="5" id="comment"></textarea>
+				  </div>
+				</div>
+				<div class="form-group">        
+				  <div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-default">Submit</button>
+				  </div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	</div>
+
+<script type="text/javascript">
+	function change(clkid){
+		var a=document.getElementById("faicon-"+clkid);
+		var b=document.getElementById("card"+clkid);
+		for (i=0;i<=5;i++){
+			document.getElementById("cardgrp"+i).classList.remove("toggle");
+			document.getElementById("faicon-grp"+i).classList.remove("icon-color");
+		}
+		b.classList.add("toggle");
+		a.classList.add("icon-color")
+		if(a.classList[1]=="fa-angle-right"){
+			a.classList.remove("fa-angle-right");
+			a.classList.add("fa-angle-down");			
+		}
+		else{
+			a.classList.remove("fa-angle-down");
+			a.classList.add("fa-angle-right");
+		}
+	}
+</script>
+
+{% endblock content %}
