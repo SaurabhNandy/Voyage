@@ -26,9 +26,10 @@ def home():
 
 @app.route('/aviair/contact',methods = ['POST', 'GET'])
 def contact():
-	data=[session["username"],session["fullname"],session["wallet"],session["vcoins"]]
-	return render_template('contact.html',contact='active-link',userdata=data)
-
+	if "username" in session:
+		data=[session["username"],session["fullname"],session["wallet"],session["vcoins"]]
+		return render_template('contact.html',contact='active-link',userdata=data)
+	return render_template('contact.html',contact='active-link')
 
 @app.route('/aviair/profile',methods = ['POST', 'GET'])
 def profile():
