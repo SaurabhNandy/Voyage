@@ -16,7 +16,7 @@
 		<div class="row col-12 mx-0" style="background-image: url('/static/media/profileback.jpg'); height:150px;">
 		</div>
 		<div class="row my-2" >
-			<div class="col-lg-4 pull-lg-8 text-xs-center ml-auto">
+			<div class="col-lg-4 pull-lg-8 text-xs-center mx-auto col-sm-10 col-xs-9">
 				<img class="img-fluid img-thumbnail rounded-circle ml-2" {% if userdata.9 %} src="/static/media/profilepics/{{userdata.9}}" {% else %} src="/static/media/default.jpg" {% endif %} alt="avatar" style="width:300px;height:300px;">
 				<div class="custom-file mb-3 mt-3 ml-4 col-8">
 					<form method="post" enctype="multipart/form-data" id="profilepic-form" action="/uploadprofilepic/{{userdata.0}}">
@@ -98,41 +98,6 @@
 									<h4>{{userdata.8}}</h4>
 								</div>
 							</div>
-							<div class="col-md-12">
-								<hr>
-								<h4 class="m-t-2"><span class="fa fa-clock-o ion-clock pull-xs-right"></span> Recent Activity</h4>
-								<table class="table table-hover table-striped">
-									<tbody>                                    
-										<tr>
-											<td>
-												<strong>Abby</strong> joined ACME Project Team in <strong>`Collaboration`</strong>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<strong>Gary</strong> deleted My Board1 in <strong>`Discussions`</strong>
-											</td>
-	
-										</tr>
-										<tr>
-											<td>
-												<strong>Kensington</strong> deleted MyBoard3 in <strong>`Discussions`</strong>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<strong>John</strong> deleted My Board1 in <strong>`Discussions`</strong>
-											</td>
-	
-										</tr>
-										<tr>
-											<td>
-												<strong>Skell</strong> deleted his post Look at Why this is.. in <strong>`Discussions`</strong>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
 						</div>
 						<!--/row-->
 					</div>
@@ -207,7 +172,7 @@
 						</div>
 
 					<div class="tab-pane" id="messages">
-						<h4 class="my-3">Recent Messages &amp; Notifications</h4>
+						<h4 class="m-t-2 my-3"><span class="fa fa-clock-o ion-clock pull-xs-right"></span> Recent Messages &amp; Notifications</h4>
 						<table class="table table-hover table-striped">
 							<tbody>                                    
 								<tr>
@@ -236,6 +201,7 @@
 
 					<div class="tab-pane" id="booking-history">
 							<h4 class="my-3"><span class="fa fa-clock-o ion-clock pull-xs-right"></span>Your Activity</h4>
+							{% if bookingdetails %}
 							<table class="table table-hover table-striped">
 								<tbody>  
 									<tr>
@@ -246,16 +212,19 @@
 										<th>Journey Date</th>
 										<th>Trans. Amount</th>
 										<th>Booking Status</th>
-									</tr>                                  
+									</tr>  
+									
+									{% for b in bookingdetails %}
 									<tr>
-										<td>1</td>
-										<td>1234567890</a></td>
-										<td>BOM</td>
-										<td>AGR</td>
-										<td>13/09/2019</td>
-										<td>5,608</td>
-										<td><a href="" data-toggle="modal" data-target="#myModal">View details</a></td>	  
-										<div class="modal fade" id="myModal">
+										<td>{{loop.index}}</td>
+										<td>{{b.0}}</a></td>
+										<td>{{b.1}}</td>
+										<td>{{b.2}}</td>
+										<td>{{b.3}}</td>
+										<td>Rs {{b.4}}</td>
+										
+										<td><a href="" data-toggle="modal" data-target="#myModal{{loop.index}}">View details</a></td>	  
+										<div class="modal fade" id="myModal{{loop.index}}">
 											<div class="modal-dialog modal-dialog-centered modal-lg">
 												<div class="modal-content">
 													<div class="modal-header">
@@ -268,24 +237,24 @@
 																	<div class="col-3 h-100" >
 																		<div class="col-12" style="font-size:40px">13 SEP</div> 
 																		<div class="col-12">
-																			<img class="img-fluid w-100" src="{{url_for('static',filename = 'media/booked.png')}}">
+																			<img class="img-fluid w-100" src="{{url_for('static',filename = 'media/'+ b.11+'.png')}}" >
 																		</div>
 																	</div>
 																	<div class="col-5">
-																	PNR Number: 1234567890<br>
-																	Flight Number:<br>
-																	From:<br>
-																	Departure Time: <br>
-																	Adults:<br>
-																	Transaction Amount:
+																	PNR Number: {{b.0}}<br>
+																	Flight Number: {{b.5}}<br>
+																	From: {{b.1}}<br>
+																	Departure Time: {{b.8}}<br>
+																	Adults: {{b.9}}<br>
+																	Transaction Amount: Rs {{b.4}}
 																	</div>
 																	<div class="col-4">
-																	Transaction ID:<br>
-																	Booking Date: <br>
-																	To: <br>
-																	Arrival time:<br>
-																	Children:<br>
-																	Booking Status:
+																	Transaction ID: {{b.6}}<br>
+																	Journey Date: {{b.3}}<br>
+																	To: {{b.2}}<br>
+																	Arrival time: {{b.7}}<br>
+																	Children: {{b.10}}<br>
+																	Booking Status: {{b.11}}
 																	</div>
 																</div>
 															</div> 
@@ -297,57 +266,13 @@
 											</div>
 										</div>
 									</tr>
+									{% endfor %}
+							{% else %}
+							<p>No Booking history available</p>
+							{% endif %}                 
+									
 
-									<tr>
-											<td>1</td>
-											<td>1234567890</a></td>
-											<td>BOM</td>
-											<td>AGR</td>
-											<td>13/09/2019</td>
-											<td>5,608</td>
-											<td><a href="" data-toggle="modal" data-target="#myModal1">View details</a></td>	  
-											<div class="modal fade" id="myModal1">
-                                                    <div class="modal-dialog modal-dialog-centered modal-lg">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                              <h4 class="modal-title">Your Ticket</h4>
-                                                              <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                    <div class="container col-12 mx-auto" style="box-shadow: 0 0 6px #333;">
-                                                                        <div class="row">
-                                                                            <div class="col-3 h-100" >
-                                                                                <div class="col-12" style="font-size:40px">13 SEP</div> 
-                                                                                <div class="col-12">
-                                                                                    <img class="img-fluid w-100" src="{{url_for('static',filename = 'media/cancelled.png')}}">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-5">
-                                                                            PNR Number: 1234567890<br>
-                                                                            Flight Number:<br>
-                                                                            From:<br>
-                                                                            Departure Time: <br>
-                                                                            Adults:<br>
-                                                                            Transaction Amount:
-                                                                            </div>
-                                                                            <div class="col-4">
-                                                                            Transaction ID:<br>
-                                                                            Booking Date: <br>
-                                                                            To: <br>
-                                                                            Arrival time:<br>
-                                                                            Children:<br>
-                                                                            Booking Status:
-                                                                            </div>
-                                                                        </div>
-                                                                    </div> 
-                                                                </div>
-                                                            <div class="modal-footer mb-0">
-                                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-										</tr>
+									
 								</tbody> 
 							</table>
 						</div>

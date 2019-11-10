@@ -36,7 +36,10 @@ def profile():
 	if "username" in session:
 		cur.execute("SELECT u_name,name,email,wallet,phone,address,city,state,country,profilepic from Users where u_name=%s;",(session["username"],))
 		userdata=cur.fetchone()
-		return render_template('profile.html',profile='active-link',userdata=userdata)
+		cur.execute("SELECT pnr,from_airport,to_airport,date_,transaction_amount,flight_id,transaction_id,arr_time,dept_time,adults,children,status FROM (SELECT * FROM Bookings where u_name=%s) B JOIN Flights F ON B.f_id=F.id ORDER BY date_ DESC;",(session["username"],))
+		book=cur.fetchall()
+		print(book)
+		return render_template('profile.html',profile='active-link',userdata=userdata,bookingdetails=book)
 	else:
 		flash('Please login to continue.. ','info')
 		return redirect(url_for('login'))
