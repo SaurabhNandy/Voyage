@@ -1,4 +1,5 @@
 import pandas as pd
+import random
 
 data=pd.read_excel('FlightSchedule_6May_New.xlsx',skiprows=4)
 
@@ -22,19 +23,35 @@ print(query)
 query='INSERT INTO Flights VALUES '
 
 k=1
-days=['MON','TUE','WED','THU','FRI','SAT','SUN']
+days=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
+days_temp=['MON','TUE','WED','THU','FRI','SAT','SUN']
 for j,i in d.iterrows():
         x=i['Days Of Operation']
+        for z in range(len(days)):
+                x=x.replace(days_temp[z],days[z])
         if x=='Daily':
-                x='/'.join(days)
+                for _ in days:
+                        query+="("+str(k)+",'"+i['6E FlightNumber'].split('/')[0]+"','"+i['Origin'].split('(')[1][:3]+"','"+i['Destination'].split('(')[1][:3]+"','6E','"+i['Arrival(LT)']+"','"+i['Departure(LT)']+"','"+i['Flight Type']+"','"+_+"',"+str(random.randint(5000,50000))+"),\n "
+                        k+=1
         elif 'Every ' in x:
-                x=x.replace('Every ','')
+                x=x.replace('Every ','').split('/')
+                for _ in x:
+                        query+="("+str(k)+",'"+i['6E FlightNumber'].split('/')[0]+"','"+i['Origin'].split('(')[1][:3]+"','"+i['Destination'].split('(')[1][:3]+"','6E','"+i['Arrival(LT)']+"','"+i['Departure(LT)']+"','"+i['Flight Type']+"','"+_+"',"+str(random.randint(5000,50000))+"),\n "
+                        k+=1
         elif 'Except ' in x:
                 x=x.replace('Except ','').split('/')
-                x='/'.join([c for c in days if c not in x])
-        query+="("+str(k)+",'"+i['6E FlightNumber'].split('/')[0]+"','"+i['Origin'].split('(')[1][:3]+"','"+i['Destination'].split('(')[1][:3]+"','6E','"+i['Arrival(LT)']+"','"+i['Departure(LT)']+"','"+i['Flight Type']+"','"+x+"'),\n ";
-        k+=1
+                x=[c for c in days if c not in x]
+                for _ in x:
+                        query+="("+str(k)+",'"+i['6E FlightNumber'].split('/')[0]+"','"+i['Origin'].split('(')[1][:3]+"','"+i['Destination'].split('(')[1][:3]+"','6E','"+i['Arrival(LT)']+"','"+i['Departure(LT)']+"','"+i['Flight Type']+"','"+_+"',"+str(random.randint(5000,50000))+"),\n ";
+                        k+=1
+        else:
+                x=x.split('/')
+                for _ in x:
+                        query+="("+str(k)+",'"+i['6E FlightNumber'].split('/')[0]+"','"+i['Origin'].split('(')[1][:3]+"','"+i['Destination'].split('(')[1][:3]+"','6E','"+i['Arrival(LT)']+"','"+i['Departure(LT)']+"','"+i['Flight Type']+"','"+_+"',"+str(random.randint(5000,50000))+"),\n ";
+                        k+=1   
 print(query)
+f=open('flightquery1.txt','w')
+f.write(query)
 
 
 

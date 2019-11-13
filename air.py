@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, redirect,url_for, session,flash
 from werkzeug.utils import secure_filename
-import psycopg2, json, os
-
+import psycopg2, json, os, datetime
 
 app = Flask(__name__,static_url_path='/static')
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
@@ -24,22 +23,33 @@ def home():
 		return render_template('home.html',home='active-link',airports=airports)
 
 
+
+
 @app.route('/aviair/contact',methods = ['POST', 'GET'])
 def contact():
+	if request.method=="POST":
+		cur.execute("INSERT INTO Feedback values(%s,%s,%s,%s);",(request.form["fname"],request.form["lname"],request.form["email"],request.form["comment"],))
+		con.commit()
+		flash('Your Feedback has been recorded... Thank you for your time!!','info')
 	if "username" in session:
 		data=[session["username"],session["fullname"],session["wallet"],session["vcoins"]]
 		return render_template('contact.html',contact='active-link',userdata=data)
 	return render_template('contact.html',contact='active-link')
 
+
+
+
+
 @app.route('/aviair/profile',methods = ['POST', 'GET'])
 def profile():
 	if "username" in session:
-		cur.execute("SELECT u_name,name,email,wallet,phone,address,city,state,country,profilepic from Users where u_name=%s;",(session["username"],))
+		cur.execute("SELECT u_name,name,email,wallet,phone,address,city,state,country,profilepic,v_coins FROM Users NATURAL JOIN regUsers where u_name=%s;",(session["username"],))
 		userdata=cur.fetchone()
-		cur.execute("SELECT pnr,from_airport,to_airport,date_,transaction_amount,flight_id,transaction_id,arr_time,dept_time,adults,children,status FROM (SELECT * FROM Bookings where u_name=%s) B JOIN Flights F ON B.f_id=F.id ORDER BY date_ DESC;",(session["username"],))
+		cur.execute("SELECT pnr,from_airport,to_airport,to_char(date_, 'DD Mon YYYY'),transaction_amount,flight_id,transaction_id,arr_time,dept_time,adults,children,status,to_char(mod_date, 'DD Mon YYYY') FROM (SELECT * FROM Bookings where u_name=%s) B JOIN Flights F ON B.f_id=F.id ORDER BY date_ DESC;",(session["username"],))
 		book=cur.fetchall()
-		print(book)
-		return render_template('profile.html',profile='active-link',userdata=userdata,bookingdetails=book)
+		cur.execute("SELECT message,to_char(date_, 'DD Mon YYYY') from messages where u_name=%s ORDER BY date_ DESC;",(session["username"],))
+		messages=cur.fetchall()
+		return render_template('profile.html',profile='active-link',userdata=userdata,bookingdetails=book,messages=messages)
 	else:
 		flash('Please login to continue.. ','info')
 		return redirect(url_for('login'))
@@ -67,7 +77,11 @@ def uploadProfilePic(name):
 		filename = secure_filename(file.filename)
 		file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 		cur.execute("UPDATE Users SET profilepic=%s WHERE u_name=%s;",(filename,name,))
+		con.commit()
 		return redirect(url_for('profile'))
+
+
+
 
 
 @app.route('/aviair/register',methods = ['POST', 'GET'])
@@ -110,10 +124,10 @@ def login():
 			#con.close()
 			flash('Registration successful! Please login to continue','success')
 			return render_template('login.html',login='active-link')
-	#con.commit()
-	#cur.close()
-	#con.close()
 	return render_template('login.html',login='active-link')
+
+
+
 
 
 @app.route('/aviair/logout',methods = ['POST', 'GET'])
@@ -126,18 +140,71 @@ def logout():
 	return redirect(url_for('home'))
 
 
+
+
+
 @app.route('/aviair/search',methods = ['POST', 'GET'])
 def searchFlights():
-	print(request.form)
-	return render_template('tickets.html',)
+	#print(request.form)
+	if request.form["flight-type"]=="one-way":
+		dt = request.form["departing"]
+		month,day, year = (int(x) for x in dt.split('/'))    
+		dept = datetime.date(year, month, day).strftime("%A")
+		source=request.form["from-airport"].split('(')[1][:3]
+		destination=request.form["to-airport"].split('(')[1][:3]
+		adults=request.form['adults']
+		children=request.form['children']
+		date=request.form["departing"]
+		clas=request.form["class"]
+		cur.execute("SELECT * from search_flights(%s,%s,%s,to_date(%s,'mm/dd/yyyy'),%s);",(source,destination,adults+children,date,dept,))
+		result=cur.fetchall()
+		print(source, destination,dept)
+		print(result)
+		typ=["one-way",date,clas,adults,children,adults+children]
+		return render_template('search.html',typ=typ,results=result)
+	elif request.form["flight-type"]=="roundtrip":
+		dt = request.form["departing"]
+		rt = request.form["returning"]
+		month,day, year = (int(x) for x in dt.split('/'))    
+		dept = datetime.date(year, month, day).strftime("%A")
+		month,day, year = (int(x) for x in rt.split('/')) 
+		ret = datetime.date(year, month, day).strftime("%A")
+		source=request.form["from-airport"].split('(')[1][:3]
+		destination=request.form["to-airport"].split('(')[1][:3]
+		date_dept=request.form["departing"]
+		date_ret=request.form["returning"]
+		adults=request.form['adults']
+		children=request.form['children']
+		clas=request.form["class"]
+		cur.execute("SELECT * from search_flights(%s,%s,%s,to_date(%s,'mm/dd/yyyy'),%s);",(source,destination,adults+children,date_dept,dept,))
+		result=cur.fetchall()
+		cur.execute("SELECT * from search_flights(%s,%s,%s,to_date(%s,'mm/dd/yyyy'),%s);",(destination,source,adults+children,date_ret,ret,))
+		result_return=cur.fetchall()
+		print(source, destination)
+		print(result,result_return)
+		typ=["round-trip",date_dept,date_ret,clas,adults,children,adults+children]
+		return render_template('search.html',typ=typ,results=result,resultsreturn=result_return)
+	
+'''
+ImmutableMultiDict([('flight-type', 'one-way'), ('from-airport', 'Chhatrapati Shivaji Maharaj International Airport,Mumbai (BOM)'), ('to-airport', 'Lokpriya Gopinath Bordoloi International Airport,Guwahati (GAU)'), ('departing', '11/16/2019'), ('adults', '1'), ('children', '1'), ('class', 'Economy')])
+'''
+
+
+@app.route('/aviair/confirmBooking',methods = ['POST', 'GET'])
+def confirmBooking():
+	if request.method=="POST":
+		print('vhjgs')
+
 
 
 @app.route('/aviair/getusernames',methods = ['POST', 'GET'])
 def getUsernames():
-	cur.execute("SELECT u_name FROM users")
+	cur.execute("SELECT u_name FROM users;")
 	usernames=cur.fetchall()
 	usernames=[u[0] for u in usernames]
 	return json.dumps(usernames)
+
+
 
 
 if __name__ == '__main__':
