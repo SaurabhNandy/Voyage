@@ -220,8 +220,9 @@ def confirmBooking():
 		tid=request.form['tid']
 		tamount=request.form['tamount']
 		cur.execute("select book_flight(%s,%s,to_date(%s,'mm/dd/yyyy'),%s,%s,%s,%s,%s)",(session["username"],fid,date,adults,children,clas,tid,tamount))
+		con.commit()
 		pnr=cur.fetchone()[0]
-		flash('Your ticket with pnr '+str(pnr)+' has been booked successfully ...<br>Please check booking history for more details','success')
+		flash('Your ticket with pnr '+str(pnr)+' has been booked successfully .... Please check booking history for more details','success')
 		return redirect(url_for('profile'))
 	else:
 		#data

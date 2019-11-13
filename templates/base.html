@@ -52,7 +52,7 @@
       <strong><li class="nav-item faq"><a class="nav-link" href="{{url_for('logout')}}" style="color:#fff;">Logout</a></li></strong>
       <strong><li class="nav-item services"><a class="nav-link" style="color:#fff;">Welcome {{userdata.0}}</a></li></strong>
       {% else %}
-      <strong><li class="nav-item faq"><a class="nav-link" href="/aviair/login" style="color:#fff;">Login</a></li></strong>
+      <strong><li class="nav-item faq {% if login %} {{ login }} {% endif %}"><a class="nav-link" href="/aviair/login" style="color:#fff;">Login</a></li></strong>
       <strong><li class="nav-item faq"><a class="nav-link" href="/aviair/register" style="color:#fff;">Register</a></li></strong>
       {% endif %}
     </ul>
