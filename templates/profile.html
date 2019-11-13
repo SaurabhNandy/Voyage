@@ -17,6 +17,16 @@
 }
 }
 </style>
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+  {% for category, message in messages %}
+  <div class="alert alert-{{category}} alert-dismissible" style="z-index: 1; top:4rem;" >
+	<button type="button" class="close" data-dismiss="alert">&times;</button>
+	<strong>{{category}}!</strong> {{message}}
+  </div>
+  {% endfor %}
+{% endif %}
+{% endwith %}
 <!--https://www.codeply.com/go/xc8om4qRwG/bootstrap-4-user-profile-->
 	<div class="container col-12 mx-0 p-0" style="width:100%; overflow-x:hidden; top:4rem;">
 		<div class="row col-12 mx-0" style="background-image: url('/static/media/profileback.jpg'); height:150px;">
@@ -56,53 +66,49 @@
 						<div class="row ml-auto my-3">
 							
 							<div class="col-12 row" >
-								<div class="col-6">
-									<h4>UserName</h4>
-								</div>
-								<div class="col-6">{{userdata.0}}
-								</div><hr>
-								<div class="col-6">
-									<h4>Name</h4>
-								</div>
-								<div class="col-6">
-									<h4>{{userdata.1}}</h4>
-								</div><hr>
-								<div class="col-6">
-									<h4>Email</h4>	
-								</div>
-								<div class="col-6">
-									<h4>{{userdata.2}}</h4>
-								</div><hr>
-								<div class="col-6">
-									<h4>Phone</h4>
-								</div>
-								<div class="col-6">
-									<h4>{{userdata.4}}</h4>
-								</div>
-								<div class="col-6">
-									<h4>Address</h4>
-								</div>
-								<div class="col-6">
-									<h4>{{userdata.5}}</h4>
-								</div>
-								<div class="col-4">
-									<h4>City</h4>
-								</div>
-								<div class="col-4">
-									<h4>State</h4>
-								</div>
-								<div class="col-4">
-									<h4>Country</h4>
-								</div>
-								<div class="col-4">
-									<h4>{{userdata.6}}</h4>
-								</div>
-								<div class="col-4">
-									<h4>{{userdata.7}}</h4>
-								</div>
-								<div class="col-4">
-									<h4>{{userdata.8}}</h4>
-								</div>
+									<div class="form-group row col-12">
+											<label class="col-lg-3 col-form-label form-control-label">Name</label>
+											<div class="col-lg-9">
+												<input class="form-control" type="text" name="fname" value="{{userdata.1}}" disabled>
+											</div>
+										</div>
+										<div class="form-group row col-12">
+											<label class="col-lg-3 col-form-label form-control-label">Email</label>
+											<div class="col-lg-9">
+												<input class="form-control" type="email" name="email" value="{{userdata.2}}" disabled>
+											</div>
+										</div>
+										<div class="form-group row col-12">
+											<label class="col-lg-3 col-form-label form-control-label">Phone</label>
+											<div class="col-lg-9">
+												<input class="form-control" type="text"  name="phone" value="{% if userdata.4!=None %} {{userdata.4}} {% endif %}" placeholder="Contact No." disabled>
+											</div>
+										</div>
+										<div class="form-group row col-12">
+											<label class="col-lg-3 col-form-label form-control-label">Address</label>
+											<div class="col-lg-9">
+												<input class="form-control" type="text" name="address"  value="{% if userdata.5!=None %} {{userdata.5}} {% endif %}" placeholder="Street/Block" disabled>
+											</div>
+										</div>
+										
+										<div class="form-group row col-12">
+											<label class="col-lg-3 col-form-label form-control-label"></label>
+											<div class="col-lg-3">
+												<input class="form-control" type="text" name="city" value="{% if userdata.6!=None %} {{userdata.6}} {% endif %}" placeholder="City" disabled>
+											</div>
+											<div class="col-lg-3">
+												<input class="form-control" type="text" name="state" value="{% if userdata.7!=None %} {{userdata.7}} {% endif %}" placeholder="State" disabled>
+											</div>
+											<div class="col-lg-3">
+												<input class="form-control" type="text" name="country" value="{% if userdata.8!=None %} {{userdata.8}} {% endif %}" placeholder="Country" disabled>
+											</div>
+										</div>
+										<div class="form-group row col-12">
+											<label class="col-lg-3 col-form-label form-control-label">Username</label>
+											<div class="col-lg-9">
+												<input class="form-control" type="text" name="username" value="{{userdata.0}}" disabled>
+											</div>
+										</div>
 							</div>
 							<div class="col-5 money mr-auto mt-3">
 								<div class="col-12">

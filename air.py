@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect,url_for, session,flash
 from werkzeug.utils import secure_filename
-import psycopg2, json, os, datetime
+import psycopg2, json, os, datetime, random
 
 app = Flask(__name__,static_url_path='/static')
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
@@ -142,7 +142,6 @@ def logout():
 
 
 
-
 @app.route('/aviair/search',methods = ['POST', 'GET'])
 def searchFlights():
 	#print(request.form)
@@ -160,7 +159,7 @@ def searchFlights():
 		result=cur.fetchall()
 		print(source, destination,dept)
 		print(result)
-		typ=["one-way",date,clas,adults,children,adults+children]
+		typ=["one-way",date,clas,adults,children,int(adults)+int(children)]
 		return render_template('search.html',typ=typ,results=result)
 	elif request.form["flight-type"]=="roundtrip":
 		dt = request.form["departing"]
@@ -182,18 +181,51 @@ def searchFlights():
 		result_return=cur.fetchall()
 		print(source, destination)
 		print(result,result_return)
-		typ=["round-trip",date_dept,date_ret,clas,adults,children,adults+children]
+		typ=["round-trip",date_dept,date_ret,clas,adults,children,int(adults)+int(children)]
 		return render_template('search.html',typ=typ,results=result,resultsreturn=result_return)
 	
-'''
-ImmutableMultiDict([('flight-type', 'one-way'), ('from-airport', 'Chhatrapati Shivaji Maharaj International Airport,Mumbai (BOM)'), ('to-airport', 'Lokpriya Gopinath Bordoloi International Airport,Guwahati (GAU)'), ('departing', '11/16/2019'), ('adults', '1'), ('children', '1'), ('class', 'Economy')])
-'''
+
+
+@app.route('/aviair/passengerDetails',methods = ['POST', 'GET'])
+def passengerDetails():
+	if "username" not in session:
+		flash('Please login to continue...','warning')
+		return redirect(url_for('login'))
+	else:
+		if request.method=="POST":
+			print(request.form)
+			fid=request.form['flight'].replace('flight','')
+			date=request.form['date']
+			clas=request.form['class'].lower()
+			adults=request.form['adults']
+			children=request.form['children']
+			tid=random.randint(0,99999999)
+			cur.execute("Select fare from flights where id=%s;",(fid,))
+			tamount=int(cur.fetchone()[0])*(int(adults)+int(children))
+			n=[i for i in range(1,int(adults)+int(children)+1)]
+			bookingdata=[fid,date,clas,adults,children,tid,tamount]
+			return render_template('confirmbooking.html',num=n,book=bookingdata)
+
+
 
 
 @app.route('/aviair/confirmBooking',methods = ['POST', 'GET'])
 def confirmBooking():
 	if request.method=="POST":
-		print('vhjgs')
+		fid=request.form['fid']
+		date=request.form['date']
+		clas=request.form['class']
+		adults=request.form['adults']
+		children=request.form['children']
+		tid=request.form['tid']
+		tamount=request.form['tamount']
+		cur.execute("select book_flight(%s,%s,to_date(%s,'mm/dd/yyyy'),%s,%s,%s,%s,%s)",(session["username"],fid,date,adults,children,clas,tid,tamount))
+		pnr=cur.fetchone()[0]
+		flash('Your ticket with pnr '+str(pnr)+' has been booked successfully ...<br>Please check booking history for more details','success')
+		return redirect(url_for('profile'))
+	else:
+		#data
+		return render_template('confirmbooking.html',)
 
 
 
