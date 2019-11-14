@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{category}} alert-dismissible" style="z-index: 1; top:4rem;" >
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>{{category}}!</strong> {{message}}
+    </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+
+<div class="conatiner col-md-10 ml-auto mr-auto" style="position: relative;top:7rem;">
+		<div class="card " id="cardgrp0 ">
+			<div class="card-header accordion-toggle question-toggle collapsed bg-dark" id="grp0" data-toggle="collapse" data-target="#grpbody0" onclick="setTimeout(change, 200,this.id)">
+				<span ><li class="fa fa-angle-right" id="faicon-grp0" style="color: white;"></li><strong style="color: white;"> Add Passenger Details</strong></span>
+			</div>
+			<div class="card-body collapse" id="grpbody0">
+        {% for i in num %}
+				<div class="card{{i}}">
+					<div class="card-header accordion-toggle question-toggle collapsed" data-toggle="collapse" data-target="#grp0q{{i}}">Passenger 1</div>
+					<div class="card-body collapse" id="grp0q{{i}}">
+						    <div class="form-check-inline">
+      <label class="form-check-label" for="radio1">
+        <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" checked>Mr
+      </label>
+    </div>
+    <div class="form-check-inline">
+      <label class="form-check-label" for="radio2">
+        <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">Ms
+      </label>
+    </div>
+    <div class="form-check-inline">
+      <label class="form-check-label">
+        <input type="radio" class="form-check-input" >Mrs
+      </label>
+    </div>
+    <br>
+    <br>
+    <form class="form-inline" action="">
+    <label for="email2" class="mb-2 mr-sm-2">Name</label>
+    <input type="text" class="form-control mb-2 mr-sm-2 col md-6" id="email2" placeholder="Enter name" name="email" required>
+    <label for="pwd2" class="mb-2 mr-sm-2">Last Name</label>
+    <input type="text" class="form-control mb-2 mr-sm-2 col md-6" id="pwd2" placeholder="Enter lastname" name="pswd" required>
+    </form>
+					</div>
+				</div>
+        <br>
+        {% endfor %}
+			</div>
+		</div>
+<br>
+		<div class="card" id="cardgrp1">
+			<div class="card-header accordion-toggle question-toggle collapsed bg-dark" id="grp1" data-toggle="collapse" data-target="#grpbody1" onclick="setTimeout(change, 200,this.id)">
+				<span style="color: white;"><li class="fa fa-angle-right" id="faicon-grp1"></li><strong style="color: white;"> Payment Details</strong></span>
+			</div>
+			<div class="card-body collapse" id="grpbody1">
+			</div>
+    </div>
+    <div class="col md-6 text-center mt-5">
+        <form class="form-inline" id="confirm-form" method="post" action="{{url_for('confirmBooking')}}">
+          <input type="hidden" name="fid" value="{{book.0}}">
+          <input type="hidden" name="date" value="{{book.1}}">
+          <input type="hidden" name="class" value="{{book.2}}">
+          <input type="hidden" name="adults" value="{{book.3}}">
+          <input type="hidden" name="children" value="{{book.4}}">
+          <input type="hidden" name="tid" value="{{book.5}}">
+          <input type="hidden" name="tamount" value="{{book.6}}">
+        <input type="submit" class="btn btn-success " id="confirm-btn" name="confirm-btn" value="Confirm">
+        </form>
+      </div>
+</div>
+		<br>
+
+<script>
+$('#confirm-form').on('submit',function(){
+  console.log('gfhhjh');
+});
+</script>
+
+	
+
+{% endblock content %}

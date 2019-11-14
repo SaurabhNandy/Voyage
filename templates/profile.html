@@ -1,0 +1,329 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+.pass-invalid{
+	border: 2px solid rgb(243, 29, 29);
+	box-shadow: 0 0 10px rgb(243, 29, 29);
+}
+.pass-valid{
+	border: 2px solid rgb(6, 204, 55);
+	box-shadow: 0 0 10px rgb(6, 204, 55);
+}
+.money{
+	border: 3px solid rgb(210, 216, 212);
+	
+	font-size: 3rem;
+}
+}
+</style>
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+  {% for category, message in messages %}
+  <div class="alert alert-{{category}} alert-dismissible" style="z-index: 1; top:4rem;" >
+	<button type="button" class="close" data-dismiss="alert">&times;</button>
+	<strong>{{category}}!</strong> {{message}}
+  </div>
+  {% endfor %}
+{% endif %}
+{% endwith %}
+<!--https://www.codeply.com/go/xc8om4qRwG/bootstrap-4-user-profile-->
+	<div class="container col-12 mx-0 p-0" style="width:100%; overflow-x:hidden; top:4rem;">
+		<div class="row col-12 mx-0" style="background-image: url('/static/media/profileback.jpg'); height:150px;">
+		</div>
+		<div class="row my-2" >
+			<div class="col-lg-4 pull-lg-8 text-xs-center mx-auto col-sm-10 col-xs-9">
+				<img class="img-fluid img-thumbnail rounded-circle ml-2" {% if userdata.9 %} src="/static/media/profilepics/{{userdata.9}}" {% else %} src="/static/media/default.jpg" {% endif %} alt="avatar" style="width:300px;height:300px;">
+				<div class="custom-file mb-3 mt-3 ml-4 col-8">
+					<form method="post" enctype="multipart/form-data" id="profilepic-form" action="/uploadprofilepic/{{userdata.0}}">
+						<input type="file" class="custom-file-input" id="customFile" name="profile-filename" required>
+						<label class="custom-file-label" for="customFile">Upload different photo</label>
+						<div class="mt-3 ml-0">
+							<button type="submit" class="btn btn-primary">Upload</button>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="col-lg-8 push-lg-4 mt-5">
+				<ul class="nav nav-tabs">
+					<li class="nav-item">
+						<a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Profile</a>
+					</li>
+					<li class="nav-item">
+						<a href="" data-target="#edit" data-toggle="tab" class="nav-link">Edit</a>
+					</li>
+					<li class="nav-item">
+						<a href="" data-target="#messages" data-toggle="tab" class="nav-link">Messages</a>
+					</li>
+					<li class="nav-item">
+						<a href="" data-target="#booking-history" data-toggle="tab" class="nav-link">Booking History</a>
+					</li>
+					
+				</ul>
+				<div class="tab-content pb-3">
+					<div class="tab-pane active" id="profile">
+							<h4 class="my-3 mt-3">About</h4>
+						<div class="row ml-auto my-3">
+							
+							<div class="col-12 row" >
+									<div class="form-group row col-12">
+											<label class="col-lg-3 col-form-label form-control-label">Name</label>
+											<div class="col-lg-9">
+												<input class="form-control" type="text" name="fname" value="{{userdata.1}}" disabled>
+											</div>
+										</div>
+										<div class="form-group row col-12">
+											<label class="col-lg-3 col-form-label form-control-label">Email</label>
+											<div class="col-lg-9">
+												<input class="form-control" type="email" name="email" value="{{userdata.2}}" disabled>
+											</div>
+										</div>
+										<div class="form-group row col-12">
+											<label class="col-lg-3 col-form-label form-control-label">Phone</label>
+											<div class="col-lg-9">
+												<input class="form-control" type="text"  name="phone" value="{% if userdata.4!=None %} {{userdata.4}} {% endif %}" placeholder="Contact No." disabled>
+											</div>
+										</div>
+										<div class="form-group row col-12">
+											<label class="col-lg-3 col-form-label form-control-label">Address</label>
+											<div class="col-lg-9">
+												<input class="form-control" type="text" name="address"  value="{% if userdata.5!=None %} {{userdata.5}} {% endif %}" placeholder="Street/Block" disabled>
+											</div>
+										</div>
+										
+										<div class="form-group row col-12">
+											<label class="col-lg-3 col-form-label form-control-label"></label>
+											<div class="col-lg-3">
+												<input class="form-control" type="text" name="city" value="{% if userdata.6!=None %} {{userdata.6}} {% endif %}" placeholder="City" disabled>
+											</div>
+											<div class="col-lg-3">
+												<input class="form-control" type="text" name="state" value="{% if userdata.7!=None %} {{userdata.7}} {% endif %}" placeholder="State" disabled>
+											</div>
+											<div class="col-lg-3">
+												<input class="form-control" type="text" name="country" value="{% if userdata.8!=None %} {{userdata.8}} {% endif %}" placeholder="Country" disabled>
+											</div>
+										</div>
+										<div class="form-group row col-12">
+											<label class="col-lg-3 col-form-label form-control-label">Username</label>
+											<div class="col-lg-9">
+												<input class="form-control" type="text" name="username" value="{{userdata.0}}" disabled>
+											</div>
+										</div>
+							</div>
+							<div class="col-5 money mr-auto mt-3">
+								<div class="col-12">
+									{{userdata.10}}
+								</div>
+								<div class="col-12" style="font-size: 1.5rem;">
+									Vcoins
+								</div>
+							</div>
+							<div class="col-5 money mr-auto mt-3">
+								<div class="col-12">
+									Rs {{userdata.3}}
+								</div>
+								<div class="col-12" style="font-size: 1.5rem;">
+									Wallet amount
+								</div>
+							</div>
+						</div>
+						<!--/row-->
+					</div>
+
+					<div class="tab-pane" id="edit">
+							<h4 class="m-y-2 mt-3">Edit Profile</h4>
+							<form role="update-form" action="./update-profile/{{userdata.0}}" method="POST">
+								<div class="form-group row">
+									<label class="col-lg-3 col-form-label form-control-label">Name</label>
+									<div class="col-lg-9">
+										<input class="form-control" type="text" name="fname" value="{{userdata.1}}">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-lg-3 col-form-label form-control-label">Email</label>
+									<div class="col-lg-9">
+										<input class="form-control" type="email" name="email" value="{{userdata.2}}">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-lg-3 col-form-label form-control-label">Phone</label>
+									<div class="col-lg-9">
+										<input class="form-control" type="text"  name="phone" value="{% if userdata.4!=None %} {{userdata.4}} {% endif %}" placeholder="Contact No.">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-lg-3 col-form-label form-control-label">Address</label>
+									<div class="col-lg-9">
+										<input class="form-control" type="text" name="address"  value="{% if userdata.5!=None %} {{userdata.5}} {% endif %}" placeholder="Street/Block">
+									</div>
+								</div>
+								
+								<div class="form-group row">
+									<label class="col-lg-3 col-form-label form-control-label"></label>
+									<div class="col-lg-3">
+										<input class="form-control" type="text" name="city" value="{% if userdata.6!=None %} {{userdata.6}} {% endif %}" placeholder="City">
+									</div>
+									<div class="col-lg-3">
+										<input class="form-control" type="text" name="state" value="{% if userdata.7!=None %} {{userdata.7}} {% endif %}" placeholder="State">
+									</div>
+									<div class="col-lg-3">
+										<input class="form-control" type="text" name="country" value="{% if userdata.8!=None %} {{userdata.8}} {% endif %}" placeholder="Country">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-lg-3 col-form-label form-control-label">Username</label>
+									<div class="col-lg-9">
+										<input class="form-control" type="text" name="username" value="{{userdata.0}}" disabled>
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-lg-3 col-form-label form-control-label">Password</label>
+									<div class="col-lg-9">
+										<input class="form-control" type="password" id="password" name="password" placeholder="Enter New password">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-lg-3 col-form-label form-control-label">Confirm password</label>
+									<div class="col-lg-9">
+										<input class="form-control" type="password" id="repassword" name="repassword" placeholder="Re-enter New password">
+										<p id="pass-error" style=""></p>
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-lg-3 col-form-label form-control-label"></label>
+									<div class="col-lg-9">
+										<input type="reset" class="btn btn-secondary" value="Cancel">
+										<input type="submit" id="update-btn" class="btn btn-primary" value="Save Changes">
+									</div>
+								</div>
+							</form>
+						</div>
+
+					<div class="tab-pane" id="messages">
+						<h4 class="m-t-2 my-3"><span class="fa fa-clock-o ion-clock pull-xs-right"></span> Recent Messages &amp; Notifications</h4>
+						<table class="table table-hover table-striped">
+							<tbody> 
+								{% if messages %}
+								{% for m in messages %}                                   
+								<tr>
+									<td>
+									    {{m.0}}<span class="float-right font-weight-bold"> ~ {{m.1}}</span>
+									</td>
+								</tr>
+								{% endfor %}
+								{% else %}
+
+								<tr>
+									<td>
+										No new messages or notifications...
+									</td>
+								</tr>
+								{% endif %}
+							</tbody> 
+						</table>
+					</div>
+
+					<div class="tab-pane" id="booking-history">
+							<h4 class="my-3"><span class="fa fa-clock-o ion-clock pull-xs-right"></span> Your Activity</h4>
+							{% if bookingdetails %}
+							<table class="table table-hover table-striped">
+								<tbody>  
+									<tr>
+										<th>Sr. No.</th>
+										<th>PNR No.</th>
+										<th>From</th>
+										<th>To</th>
+										<th>Journey Date</th>
+										<th>Last Updated On</th>
+										<th>Booking Status</th>
+									</tr>  
+									
+									{% for b in bookingdetails %}
+									<tr>
+										<td>{{loop.index}}</td>
+										<td>{{b.0}}</a></td>
+										<td>{{b.1}}</td>
+										<td>{{b.2}}</td>
+										<td>{{b.3}}</td>
+										<td>{{b.12}}</td>
+										
+										<td><a href="" data-toggle="modal" data-target="#myModal{{loop.index}}">View details</a></td>	  
+										<div class="modal fade" id="myModal{{loop.index}}">
+											<div class="modal-dialog modal-dialog-centered modal-lg">
+												<div class="modal-content">
+													<div class="modal-header">
+													  <h4 class="modal-title">Your Ticket</h4>
+													  <button type="button" class="close" data-dismiss="modal">&times;</button>
+													</div>
+													<div class="modal-body">
+															<div class="container col-12 mx-auto" style="box-shadow: 0 0 6px #333;">
+																<div class="row">
+																	<div class="col-3 h-100" >
+																		<div class="col-12" style="font-size:40px">{{b.3[:2]}} </div> 
+																		<div class="col-12" style="font-size:40px">  {{b.3[3:7]}} </div>
+																		<div class="col-12">
+																			<img class="img-fluid w-100" src="{{url_for('static',filename = 'media/'+ b.11+'.png')}}" >
+																		</div>
+																	</div>
+																	<div class="col-5 mt-3">
+																	PNR Number: {{b.0}}<br>
+																	Flight Number: {{b.5}}<br>
+																	From: {{b.1}}<br>
+																	Departure Time: {{b.8}}<br>
+																	Adults: {{b.9}}<br>
+																	Transaction Amount: Rs {{b.4}}
+																	</div>
+																	<div class="col-4  mt-3">
+																	Transaction ID: {{b.6}}<br>
+																	Journey Date: {{b.3}}<br>
+																	To: {{b.2}}<br>
+																	Arrival time: {{b.7}}<br>
+																	Children: {{b.10}}<br>
+																	Booking Status: {{b.11}}
+																	</div>
+																</div>
+															</div> 
+														</div>
+													<div class="modal-footer mb-0">
+													  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</tr>
+									{% endfor %}
+							{% else %}
+							<p>No Booking history available</p>
+							{% endif %}                 		
+								</tbody> 
+							</table>
+						</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		$(document).ready(function(){
+			$('#repassword').on('keyup',function(){
+				if($('#password').val()!=$('#repassword').val()){
+					$('#repassword').addClass('pass-invalid');
+					$('#pass-error').text('Two passwords don\'t match');
+					$('#pass-error').css('color','rgb(243, 29, 29)');
+					$('#update-btn').attr('disabled',true);
+				}
+				else if($('#password').val()==$('#repassword').val()){
+					$('#password').addClass('pass-valid');
+					$('#repassword').removeClass('pass-invalid');
+					$('#repassword').addClass('pass-valid');
+					$('#pass-error').text('Valid');
+					$('#pass-error').css('color','rgb(6, 204, 55)');
+					$('#update-btn').attr('disabled',false);
+				}
+			});
+		});
+		$(".custom-file-input").on("change", function() {
+			var fileName = $(this).val().split("\\").pop();
+			$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+		});
+	</script>
+{% endblock content %}

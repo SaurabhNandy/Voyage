@@ -1,0 +1,390 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div id="booking" class="section">
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{category}} alert-dismissible" style="z-index: 1;" >
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>{{message}}</strong> 
+    </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+  <div class="section-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 ml-auto mr-auto col-lg-4 col-sm-12">
+          <div class="booking-cta">
+          <h1>Book your flight today</h1>
+          <p>hey thereee!!!</p>
+          </div>
+        </div>
+        <div class=" col-md-6 ml-auto mr-auto col-sm-12 col-lg-6">
+          <div class="booking-form">
+            <form method="post" action="{{url_for('searchFlights')}}">
+              <div class="form-group">
+                <div class="form-checkbox">
+                  <label for="one-way">
+                  <input type="radio" id="one-way" name="flight-type" value="one-way" checked>
+                  <span></span>One way
+                  </label>
+                  <label for="roundtrip">
+                  <input type="radio" id="roundtrip" name="flight-type"  value="roundtrip" >
+                  <span></span>Roundtrip
+                  </label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <div class="form-group dropdown-content" id="myDropdown">
+                    <span class="form-label">Flying from</span>
+                    <input type="text" class="form-control" name="from-airport" placeholder="City or airport" id="from" onkeyup="filterFunction(this.id)" autocomplete="off" required>
+                      <div class="dropdown-list " id="dropdown-list-from" >
+                      
+                      </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <span class="form-label">Flying to</span>
+                    <input type="text" class="form-control" name="to-airport" placeholder="City or airport" id="to" onkeyup="filterFunction(this.id)" autocomplete="off" required>
+                      <div class="dropdown-list " id="dropdown-list-to" style="display: none;">
+
+                      </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <div class="form-group">
+                  <span class="form-label">Departing</span>
+                  <input class="form-control" type="text" id="departure" placeholder="dd/mm/yyyy" name="departing" required>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                  <span class="form-label">Returning</span>
+                  <input class="form-control" type="text" id="returning" placeholder="dd/mm/yyyy" name="returning" required>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4">
+                  <div class="form-group">
+                    <span class="form-label">Adults (18+)</span>
+                    <select class="form-control custom-select" name="adults" required>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    </select>
+                    <span class="select-arrow"></span>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="form-group">
+                    <span class="form-label">Children (0-17)</span>
+                    <select class="form-control custom-select" name="children" required>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    </select>
+                    <span class="select-arrow"></span>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="form-group">
+                    <span class="form-label">Travel class</span>
+                    <select class="form-control custom-select" name="class" required>
+                    <option>Economy</option>
+                    <option>Business</option>
+                    <option>First class</option>
+                    </select>
+                    <span class="select-arrow"></span>
+                  </div>
+                  </div>
+                </div>
+            <div class="form-btn">
+            <button class="submit-btn" value="submit">Show flights</button>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br><br>
+<div class="bg-dark" style="position:relative; height:20px; width:100%; margin-bottom: 7%;margin-top: 7%;"></div>
+
+
+<div class="social-box">
+    <div class="container">
+        <div class="heads ">
+            <h1>Our Services</h1> 
+        </div>
+      <div class="row">
+          <div class="a col-lg-4 col-md-6 col-sm-6 col-xs-12 text-center">
+          <div class="box">
+                <i class="fa fa-gift fa-3x" aria-hidden="true"></i>
+            <div class="box-title">
+              <h3>Best Deals</h3>
+            </div>
+            <div class="box-text">
+              <span>Gets the most amazing discounts on your flight bookings from AviAIR.</span>
+            </div>
+            <div class="box-btn">
+                <a href="#">Learn More</a>
+            </div>
+           </div>
+        </div>   
+        
+         <div class="a col-lg-4 col-md-6 col-sm-6 col-xs-12  text-center">
+          <div class="box">
+              <i class="fa fa-commenting-o fa-3x" aria-hidden="true"></i>
+            <div class="box-title">
+              <h3>Timely Updates</h3>
+            </div>
+            <div class="box-text">
+              <span>Get updates about your bookings and flight status on the go go go. </span>
+            </div>
+            <div class="box-btn">
+                <a href="#">Learn More</a>
+            </div>
+           </div>
+        </div>   
+        
+         <div class="a col-lg-4 col-md-6 col-sm-6 col-xs-12 text-center">
+          <div class="box">
+                        <i class="fa fa-clock-o fa-3x" aria-hidden="true"></i>
+            <div class="box-title">
+              <h3>24/7 Support</h3>
+            </div>
+            <div class="box-text">
+              <span>Address all your issues to professionals for free and at any time, 24/7. </span>
+            </div>
+            <div class="box-btn">
+                <a href="#">Learn More</a>
+            </div>
+           </div>
+        </div>   
+        
+        <div class="a col-lg-4 col-md-6 col-sm-6 col-xs-12 text-center">
+          <div class="box">
+              <i class="fa fa-money fa-3x" aria-hidden="true"></i>
+            <div class="box-title">
+              <h3>Vcoins</h3>
+            </div>
+            <div class="box-text">
+              <span>Get assured Vcoins on every booking here which can be redeemed later for future bookings! </span>
+            </div>
+            <div class="box-btn">
+                <a href="#">Learn More</a>
+            </div>
+           </div>
+        </div>   
+        
+         <div class="a col-lg-4 col-md-6 col-sm-6 col-xs-12 text-center">
+          <div class="box">
+              <i class="fas fa-users fa-3x" aria-hidden="true" style="color: lightblue;  "></i>
+            <div class="box-title">
+              <h3>Personalized Experience</h3>
+            </div>
+            <div class="box-text">
+              <span>We at Aviair always try to offer our customers with more than flying!</span>
+            </div>
+            <div class="box-btn">
+                <a href="#">Learn More</a>
+            </div>
+           </div>
+        </div>   
+        
+         <div class="a col-lg-4 col-md-6 col-sm-6 col-xs-12 text-center">
+          <div class="box">
+                        <i class="fa fa-plus fa-3x" aria-hidden="true"></i>
+            <div class="box-title">
+              <h3>Additional Services</h3>
+            </div>
+            <div class="box-text">
+              <span>Select from a range of services, make savings and enhance your flying experience </span>
+            </div>
+            <div class="box-btn">
+                <a href="#">Learn More</a>
+            </div>
+           </div>
+        </div>
+    
+    </div>    
+    </div>
+</div>
+
+
+<script type="text/javascript">
+ $(function() {
+    var dateToday = new Date();
+    $( "#departure" ).datepicker({
+      minDate: 0
+    });
+    $( "#returning" ).datepicker({
+      minDate: 0
+    });
+ });
+
+
+  $(document).ready(function(){
+    airports={{airports|tojson|safe}};
+    var jbox1= new jBox('Tooltip', {
+      attach: '#from',
+      target: '#from',
+      theme: 'TooltipBorder',
+      trigger: 'keyup',
+      adjustTracker: true,
+      closeOnClick: 'body',
+      closeButton: 'box',
+      animation:{open: 'pulse', close: 'flip'},
+      position: {
+        x: 'left',
+        y: 'bottom'
+      },
+      outside: 'y',
+      pointer: 'left:20',
+      offset: {
+        x: 25
+      },
+      content:$('#dropdown-list-from'),
+      height:250,
+      responsiveWidth:true,
+      responsiveHeight:true,
+      onOpen: function() {
+        this.source.addClass('active');
+        inp=document.getElementById('from').value.toLowerCase();
+        var a='';
+        for(var i=0;i<airports.length;i++){
+          var temp='<li class="from" id="'+airports[i][0]+'">'+airports[i][1]+','+airports[i][2]+' ('+airports[i][0]+')</li>';
+          var txtValue=airports[i][1]+','+airports[i][2]+' ('+airports[i][0]+')';
+          if (txtValue.toLowerCase().indexOf(inp) > -1 && txtValue!=$("#to").val()) {
+            a+=temp;
+          }
+        };
+        if(a==''){
+          a="No Airports found";
+        }
+        this.setContent(a);
+      },
+      onClose: function() {
+        this.source.removeClass('active');
+      }
+    });
+
+    var jbox2= new jBox('Tooltip', {
+      attach: '#to',
+      target: '#to',
+      theme: 'TooltipBorder',
+      trigger: 'keyup',
+      adjustTracker:true,
+      closeOnClick: 'body',
+      closeButton: 'box',
+      animation:{open: 'pulse', close: 'flip'},
+      position: {
+        x: 'left',
+        y: 'bottom'
+      },
+      outside: 'y',
+      pointer: 'left:20',
+      offset: {
+        x: 25
+      },
+      content:$('#dropdown-list-to'),
+      height:250,
+      responsiveWidth:true,
+      responsiveHeight:true,
+      onOpen: function() {
+        this.source.addClass('active');
+        inp=document.getElementById('to').value.toLowerCase();
+        var a='';
+        for(var i=0;i<airports.length;i++){
+          var temp='<li class="to" id="'+airports[i][0]+'">'+airports[i][1]+','+airports[i][2]+' ('+airports[i][0]+')</li>';
+          var txtValue=airports[i][1]+','+airports[i][2]+' ('+airports[i][0]+')';
+          if (txtValue.toLowerCase().indexOf(inp) > -1 && txtValue!=$("#from").val()) {
+            a+=temp;
+          }
+        };
+        if(a==''){
+          a="No Airports found";
+        }
+        this.setContent(a);
+      },
+      onClose: function() {
+        this.source.removeClass('active');
+      }
+    });
+
+    $(document).on("click","li",function(){
+      if($(this).hasClass("from")){
+        $("input#from").val($(this).html());
+        $("input#from").attr("value",$(this).attr("id"));
+        jbox1.close();
+      }
+      else if($(this).hasClass("to")){
+        $("input#to").val($(this).html());
+        $("input#to").attr("value",$(this).attr("id"));
+        jbox2.close();
+      }
+    });
+    $("#from").click(function(){
+      $("#from").attr("placeholder","Search airports...");
+    });
+    $("#to").click(function(){
+      $("#to").attr("placeholder","Search airports...");
+    });
+
+    if($("#one-way").is(':checked')){
+        $("#returning").prop("disabled",true);
+    }
+    else if($("#roundtrip").is(':checked')){
+      $("#returning").prop("disabled",false);
+    };
+
+    $("input[type='radio']").on("click",function(){
+      if($("#one-way").is(':checked')){
+        $("#returning").prop("disabled",true);
+      }
+      else if($("#roundtrip").is(':checked')){
+        $("#returning").prop("disabled",false);
+      }
+  });
+
+  });
+
+    var $animation_elements = $('.a');
+    var $window = $(window);
+
+    function check_if_in_view() {
+      var window_height = $window.height();
+      var window_top_position = $window.scrollTop();
+      var window_bottom_position = (window_top_position + window_height);
+
+      $.each($animation_elements, function() {
+        var $element = $(this);
+        var element_height = $element.outerHeight();
+        var element_top_position = $element.offset().top;
+        var element_bottom_position = (element_top_position + element_height);
+
+        //check to see if this current container is within viewport
+        if ((element_bottom_position >= window_top_position) &&
+          (element_top_position <= window_bottom_position)) {
+          $element.addClass('in-view');
+        } else {
+          $element.removeClass('in-view');
+        }
+      });
+    }
+
+  $window.on('scroll resize', check_if_in_view);
+  $window.trigger('scroll');
+</script>
+
+{% endblock content %}

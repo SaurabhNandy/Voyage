@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{category}} alert-dismissible" style="z-index: 1; top:4rem;" >
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>{{category}}!</strong> {{message}}
+    </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+{% if typ.0=="one-way" %}
+<div class="container col-12" style="position: relative;top:5rem;">
+	<div class="row" style="margin-left:0px; margin-right: 0px;">
+		<div class="col-md-10">
+				<div class="card card-top">
+					<div class="card-header">
+						<div class="row">
+						<div class="col-6">
+              <h5>Best Departing Flights:  {{results.0.3}} >>> {{results.0.2}}</h5>
+						</div>
+						<div class="col-md-6">
+							<a href="{{url_for('home')}}" style="text-decoration: none;;"><button type="button" class="btn btn-primary btn-sm btn-block" >
+								<span class=""></span> Continue Searching         <!-- redirect to home page -->
+							</button></a>
+						</div>
+						</div>
+					</div>
+				</div>
+				<br>
+				<form id="flight-form" method="post" action="{{url_for('passengerDetails')}}">
+          {% for r in results %}
+				<div class="card">
+					<div class=" card-body row">
+						<div class="col-md-2" style=""><i class="fa fa-plane fa-5x" aria-hidden="true" style="color: skyblue; border: 4px solid"></i>
+						</div>
+						<div class="col-md-3">
+							<h4 class="name"><strong>{{r.5}} – {{r.6}} </strong></h4>
+							<h4><small>Indigo</small></h4>
+						</div>
+						<div class="col-md-6">
+							<div class="col-md-3 float-right">
+								<h6><strong>{{r.1}} <br><span class="text-muted">{{r.3}}-{{r.2}}</span></strong></h6>
+								<button type="button" class="btn btn-info" data-toggle="modal" data-target="#flight{{r.0}}modal">Info</button>
+                <div class="modal fade" id="flight{{r.0}}modal" role="dialog">
+                    <div class="modal-dialog modal-lg">
+                    <div class="card">
+                <div class="card-header">
+                <h2 style="text-align: center;">Flight and Fare details</h2>
+                <hr><hr>
+                <br>
+                <h4><strong>{{r.3}} -- > {{r.2}}</strong><span  class="float-right"><strong>Rs {{r.9*typ.5}}</strong></span></h4>
+                <br>              
+                <h6>{{r.8}}, {{typ.1}} ~ {{r.5}}-{{r.6}}</h6>
+                <div>{{r.1}}-A320</div>
+                <span class="float-right"> <strong>Status:</strong> Pending</span>
+                <br>
+                <hr>           
+                <h6>Check In Baggage -15kg per person</h6>
+                <br>
+                <h6>Hand Baggage -7kg per person</h6>
+                <hr>
+                <div>Adult(>12) <span class="float-right">{{typ.5}}x Rs {{r.9}}</span></div>           
+                <hr>
+                <br>
+                <div>Regular Fare<span class="float-right">Rs {{r.9*typ.5-2410}}</span></div>
+                <div>Fuel Charge<span class="float-right">Rs 800</span></div>
+                <div>Airport Security Fee<span class="float-right">Rs 250</span></div>
+                <div>Development Fee<span class="float-right"> Rs 300</span></div>
+                <div>CGST<span class="float-right">Rs 530</span></div>
+                <div>SGST<span class="float-right">Rs 530</span></div>           
+                <br>
+                <button type="button" class="float-right btn btn-info"><a style="color: white;" href="booking\details.html">Continue</a></button>               
+                </div>
+                </div>   
+                </div>               
+                </div>    
+              </div>
+							<div class="col-md-6">
+								<div class="custom-control custom-radio custom-control mt-4">
+							      <input type="radio" class="custom-control-input flight-radio" id="flight{{r.0}}" name="flight" value="flight{{r.0}}">
+							      <label class="custom-control-label" for="flight{{r.0}}"><h4>Rs {{r.9}}/-</h4></label>
+							    </div>
+							</div>		
+						</div>
+					</div>
+				</div>
+        <hr>
+        {% endfor %}
+        <input type="hidden" value="{{typ.1}}" name="date">
+        <input type="hidden" value="{{typ.2}}" name="class">
+        <input type="hidden" value="{{typ.3}}" name="adults">
+        <input type="hidden" value="{{typ.4}}" name="children">
+        <input type="submit" class="float-right btn btn-info" id="flight-submit" form="flight-form" placeholder="Continue" value="Continue">
+			</form>
+		</div>
+	</div>
+</div>
+    
+
+
+{% elif typ.0=="round-trip" %}
+
+{% for r in resultsreturn %}
+{{r}}
+{% endfor %}
+
+{% endif %}
+<script>
+$('#flight-form').on('submit',function(e){
+  
+  if($('.flight-radio:checked').val()){
+    console.log($('.flight-radio:checked').val());
+  }
+  else{
+    e.preventDefault();
+    alert("Please select a flight to continue");
+  }
+  
+});
+</script>
+
+
+{% endblock content %}
