@@ -11,7 +11,19 @@
     {% endfor %}
   {% endif %}
 {% endwith %}
-
+<style>
+.bottom {
+          position: fixed;
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          background-color:rgb(255,255,255,0);
+          color: white;
+          text-align: center;
+          height: 3rem;
+          z-index:5;
+}
+</style>
 {% if typ.0=="one-way" %}
 <div class="container col-12" style="position: relative;top:5rem;">
 	<div class="row" style="margin-left:0px; margin-right: 0px;">
@@ -73,7 +85,7 @@
                 <div>CGST<span class="float-right">Rs 530</span></div>
                 <div>SGST<span class="float-right">Rs 530</span></div>           
                 <br>
-                <button type="button" class="float-right btn btn-info"><a style="color: white;" href="booking\details.html">Continue</a></button>               
+                <button type="button" class="sticky-button float-right btn btn-info"><a style="color: white;" href="booking\details.html">Back</a></button>               
                 </div>
                 </div>   
                 </div>               
@@ -90,12 +102,15 @@
 				</div>
         <hr>
         {% endfor %}
+        <div class="bottom ml-1">
         <input type="hidden" value="{{typ.1}}" name="date">
         <input type="hidden" value="{{typ.2}}" name="class">
         <input type="hidden" value="{{typ.3}}" name="adults">
         <input type="hidden" value="{{typ.4}}" name="children">
-        <input type="submit" class="float-right btn btn-info" id="flight-submit" form="flight-form" placeholder="Continue" value="Continue">
-			</form>
+        <input type="submit" class=" float-right btn btn-info btn-lg" style='position: relative; left:10px;' id="flight-submit" form="flight-form" placeholder="Continue" value="Continue" style="background-color: #3582B6; ">
+          </div>
+
+ 		</form>
 		</div>
 	</div>
 </div>
