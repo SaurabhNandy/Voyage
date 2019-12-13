@@ -1,2 +1,2 @@
-# AviAIR
+# VOYAGE
 Airline Reservation system using Flask
