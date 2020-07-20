@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="./logo%20(2).png" width=200px height=230px/>
+    <img src="./static/media/logo%20(2).png" width=200px height=230px/>
 <br>
 <br>
 
@@ -26,16 +26,16 @@ Voyage is an Airline Reservation system that provides the most basic functionali
 # Screenshots
 <div align="center">
     <br> 
-        <img src ="src/assets/screenshots/login.png" width=300px height=500px alt="login-ss">
+        <img src ="./static/media/home.png" alt="home-ss">
     <br>
     <br> 
-        <img src ="src/assets/screenshots/send.png" width=300px height=500px alt="send-ss">
+        <img src ="./static/media/detail.png" alt="home-detail-ss">
     <br>
     <br> 
-        <img src ="src/assets/screenshots/receive.png" width=300px height=500px alt="receive-ss">
+        <img src ="./static/media/contact.png" alt="contact-ss">
     <br>
     <br> 
-        <img src ="src/assets/screenshots/details.png" width=300px height=500px alt="details-ss">
+        <img src ="./static/media/register_login.png" alt="register-login-ss">
     <br>
 </div>
 
