@@ -7,7 +7,7 @@
 </div>
 
 # Voyage
-Voyage is an Airline Reservation system that provides the most basic functionalities developed using Flask
+Voyage provides the most basic functionalities of an Airline Reservation system, developed using Flask
 
 
 # Features
