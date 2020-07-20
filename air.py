@@ -11,6 +11,7 @@ con = psycopg2.connect("dbname='' user='' host='' password=''")
 cur=con.cursor()
 cur.execute("SELECT iata_code,name,location from airports ")
 airports=cur.fetchall()
+# airports = []
 
 
 @app.route('/',methods = ['POST', 'GET'])
